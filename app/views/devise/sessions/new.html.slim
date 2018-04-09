@@ -1,0 +1,24 @@
+.devise-background
+  .ui.card.form-card
+    .content.form-body
+      h1.form-header.text-center
+        | Social Lens
+      .form-header-sub.text-horizon-line.text-center
+        | ログイン
+      .ui.form
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          .field.form-field
+            = f.label :メールアドレス
+            = f.email_field :email, autofocus: true, autocomplete: "email"
+          .field.form-field
+            = f.label :パスワード
+            = f.password_field :password, autocomplete: "off"
+          - if devise_mapping.rememberable?
+            .field.form-field
+              .ui.checkbox
+                = f.check_box :remember_me, tobindex: 0, class: "hidden"
+                = f.label :remember_me
+                  | パスワードを記憶する
+          .actions.form-field
+            = f.submit "ログイン", class: "fluid ui blue button"
+        = render "devise/shared/links"
