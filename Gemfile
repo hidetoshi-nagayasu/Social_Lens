@@ -55,8 +55,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'pry-rails'
 gem 'devise'
-gem 'compass-rails'
 gem 'slim-rails'
 gem 'html2slim'
-gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
+gem 'bootstrap', '~> 4.1.0'
+gem 'sprockets-rails', '~> 3.2.1'
 gem 'jquery-rails'

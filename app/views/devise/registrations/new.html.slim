@@ -1,34 +1,34 @@
-.devise-background
-  .ui.card.form-card
-    .content.form-body
-      h1.form-header.text-center
-        | Social Lens
-      .form-header-sub.text-horizon-line.text-center
-        | アカウント登録
-      .ui.form
-        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-          = devise_error_messages!
-          .field.form-field
-            = f.label :性
-            = f.text_field :last_name, autofocus: true, autocomplete: "last_name"
-          .field.form-field
-            = f.label :名
-            = f.text_field :first_name, autocomplete: "first_name"
-          .field.form-field
-            = f.label :メールアドレス
-            = f.email_field :email, autocomplete: "email"
-          .field.form-field
-            = f.label :パスワード
-            - if @minimum_password_length
-              em
-                | ※
-                = @minimum_password_length
-                | 文字以上で入力してください
-            br
-            = f.password_field :password, autocomplete: "off"
-          .field.form-field
-            = f.label :パスワード確認
-            = f.password_field :password_confirmation, autocomplete: "off"
-          .actions.form-field
-            = f.submit "Sign up", class: "fluid ui blue button"
-        = render "devise/shared/links"
+.sign-in-background
+  .col-sm-11.col-md-5.col-lg-3.mx-auto.sign-in-form
+    h1.text-center.text-white.mb-4.text-light.space-1.sign-up-header
+      | Social Lens
+    h4.card-title.text-center.text-white.text-horizon-line.text-light.space-1.xs-none
+      | Sign up
+    .form-group.sign-up-form
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        = devise_error_messages!
+        .field.mb-3
+          = f.label :"First Name", class: "text-white"
+          = f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: "text-white container-fluid orig-input-text sign-up-input"
+        .field.mb-3
+          = f.label :"Last Name", class: "text-white"
+          = f.text_field :first_name, autocomplete: "first_name", class: "text-white container-fluid orig-input-text sign-up-input"
+        .field.mb-3
+          = f.label :Email, class: "text-white"
+          = f.email_field :email, autocomplete: "email", class: "text-white container-fluid orig-input-text sign-up-input"
+        .field.mb-3.text-white
+          = f.label :Password, class: "text-white mr-4"
+          - if @minimum_password_length
+            em
+              | ※
+              = @minimum_password_length
+              | 文字以上で入力してください
+          br
+          = f.password_field :password, autocomplete: "off", class: "text-white container-fluid orig-input-text sign-up-input"
+        .field.mb-4
+          = f.label :"Password Confirm", class: "text-white"
+          = f.password_field :password_confirmation, autocomplete: "off", class: "text-white container-fluid orig-input-text sign-up-input"
+        .actions.mb-4
+          = f.submit "SIGN UP", class: "btn-block text-white py-3 orig-btn-outline text-light space-1 sign-up-submit"
+        .text-center
+          = render "devise/shared/links"
