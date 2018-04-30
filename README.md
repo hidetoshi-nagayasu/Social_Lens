@@ -6,6 +6,8 @@
 
 * Configuration
   - ```git clone https://github.com/hidetoshi-nagayasu/Social_Lens.git```
+  - ```bundle install```
+  ※ if there is no "bundle". -> ```gem install bundler```
 
 * Database creation
   - ```rake db:create```
