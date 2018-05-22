@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby version: 2.4.1
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
+* Rails version: 5.1.5
 
 * Configuration
+  - ```git clone https://github.com/hidetoshi-nagayasu/Social_Lens.git```
+  - ```bundle install```
+  ※ if there is no "bundle". -> ```gem install bundler```
 
 * Database creation
+  - ```rake db:create```
+  - ```rake db:migrate```
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* View
+  - ```rails s```
