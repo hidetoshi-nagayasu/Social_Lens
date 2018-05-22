@@ -14,10 +14,11 @@
           = f.password_field :password, autocomplete: "off", class: "text-white container-fluid orig-input-text"
         - if devise_mapping.rememberable?
           .field.mb-3
-            .ui.checkbox
-              = f.check_box :remember_me, tobindex: 0
-              = f.label :remember_me, class: "text-white ml-2"
-                | パスワードを記憶する
+            .checkbox
+              label
+                = f.check_box :remember_me, tobindex: 0, class: "checkbox-custom"
+                span.text-white.ml-2.checkbox-custom-label
+                  | パスワードを記憶する
         .actions.mb-4
           = f.submit "SIGN IN", class: "btn-block text-white py-3 orig-btn-outline text-light space-1"
         .text-center
