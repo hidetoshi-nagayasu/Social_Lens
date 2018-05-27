@@ -6,8 +6,7 @@ header
       input.search-input.pl-3.py-2 type="text" placeholder="Search..."
     span.navbar-text
       / = link_to "Sign out", destroy_user_session_path, method: :delete, class: "text-thin space-1 sign-out"
-      a.text-thin.space-1.sign-out
-        | Sign out
+      | Sign out
 main.bg-light
   .container
     = notice
