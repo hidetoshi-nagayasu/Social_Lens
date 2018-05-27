@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import "bootstrap";
+@import "font-awesome";
 
 /**************************************
 *              Color
@@ -15,6 +16,30 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+header {
+  background: linear-gradient(-135deg, rgb(77, 90, 175), rgb(157, 91, 139));
+  font-weight: 100;
+
+  .search-input {
+    width: 90%;
+    border-radius: 5px;
+    opacity: 0.3;
+    border: none;
+    color: #444;
+    transition: all 0.3s;      
+    
+
+    &:focus {
+      opacity: 1;
+      outline: 0;
+    }
+  }
+
+  .sign-out {
+    color: #fff !important;
+  }
 }
 
 /**************************************
@@ -42,6 +67,24 @@ body {
 
 .text-horizon-line:after {
   margin-left: .4em;
+}
+
+.pointer:hover {
+  cursor: pointer;
+}
+
+.hover-bg-light-circle:hover {
+  background-color: rgb(225, 225, 225);
+  transition: all 0.3s;
+  border-radius: 50%;
+}
+
+.text-thin {
+  font-weight: 100;
+}
+
+.space-1 {
+  letter-spacing: 0.1em;
 }
 
 /**************************************
@@ -102,7 +145,7 @@ body {
   width: 100%;
   height: 100%;
   position: relative;
-  background-image: linear-gradient(-135deg, rgb(77, 90, 175), rgb(187, 188, 222));
+  background: linear-gradient(-135deg, rgb(77, 90, 175), rgb(187, 188, 222));
   background-size: cover;
   z-index: 0;
 }
@@ -112,14 +155,6 @@ body {
   top: 50%;
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
-}
-
-.text-thin {
-  font-weight: 100;
-}
-
-.space-1 {
-  letter-spacing: 0.1em;
 }
 
 .orig-btn-outline {
@@ -191,5 +226,51 @@ body {
     height: 18px;
     border: 1px solid #fff !important;
     border-radius: 4px;
+  }
+}
+
+/**************************************
+*              Top
+***************************************/
+.card-shadow {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.24);
+}
+
+.likebox {
+  margin-bottom: -5px;
+}
+
+.dropdown-arrow-hide {
+  color: #888;
+
+  &::after {
+    display: none;
+  }
+}
+
+.add-comment-input {
+  border: none;
+  height: inherit;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #d5d5d5;
+  }
+}
+
+.new-post {
+  background: linear-gradient(-135deg, rgb(77, 90, 175), rgb(157, 91, 139));
+  color: #fff;
+  font-weight: 100;
+  transition: all 0.5s;
+
+  &:hover {
+    text-decoration: none;
+    color: linear-gradient(-135deg, rgb(157, 91, 139), rgb(77, 90, 175));
+    background: #fff;
+    border: 1px solid rgb(77, 90, 175);
   }
 }
