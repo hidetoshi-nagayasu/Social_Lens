@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: Social_Lens_production
-  username: Social_Lens
-  password: <%= ENV['SOCIAL_LENS_DATABASE_PASSWORD'] %>
+  username: root
+  password:

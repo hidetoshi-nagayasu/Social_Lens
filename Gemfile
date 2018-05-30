@@ -63,3 +63,7 @@ gem 'sprockets-rails', '~> 3.2.1'
 gem 'jquery-rails'
 gem 'font-awesome-rails'
 gem 'carrierwave'
+
+group :production, :staging do
+  gem 'unicorn'
+end
