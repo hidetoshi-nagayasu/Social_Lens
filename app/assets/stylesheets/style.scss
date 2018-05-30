@@ -266,3 +266,17 @@ header {
   color: #fff;
   font-weight: 100;
 }
+
+.new-post-wrapper {
+  min-height: 100px;
+}
+
+.new-post-textarea {
+  width: 100%;
+  border: none;
+  resize: none;
+
+  &:focus {
+    outline: none;
+  }
+}
