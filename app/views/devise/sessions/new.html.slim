@@ -1,0 +1,25 @@
+.session-background
+  .col-sm-11.col-md-5.col-lg-3.mx-auto.session-form
+    h1.text-center.text-white.mb-4.text-thin.space-1
+      | Social Lens
+    h4.card-title.text-center.text-white.text-horizon-line.text-thin.space-1
+      | Sign in
+    .form-group
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .field.mb-3
+          = f.label :Email, class: "text-white"
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "text-white container-fluid orig-input-text"
+        .field.mb-3
+          = f.label :Password, class: "text-white"
+          = f.password_field :password, autocomplete: "off", class: "text-white container-fluid orig-input-text"
+        - if devise_mapping.rememberable?
+          .field.mb-3
+            .checkbox
+              label
+                = f.check_box :remember_me, tobindex: 0, class: "checkbox-custom"
+                span.text-white.ml-2.checkbox-custom-label
+                  | パスワードを記憶する
+        .actions.mb-4
+          = f.submit "SIGN IN", class: "btn-block text-white py-3 orig-btn-outline text-light space-1"
+        .text-center
+          = render "devise/shared/links"

@@ -1,0 +1,35 @@
+.session-background
+  .col-sm-11.col-md-5.col-lg-3.mx-auto.session-form
+    h1.text-center.text-white.mb-4.text-thin.space-1.sign-up-header
+      | Social Lens
+    h4.card-title.text-center.text-white.text-horizon-line.text-thin.space-1.xs-none
+      | Sign up
+    .form-group.sign-up-form
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        .text-white
+          = devise_error_messages!
+        .field.mb-3
+          = f.label :"姓（Last Name）", class: "text-white"
+          = f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: "text-white container-fluid orig-input-text sign-up-input"
+        .field.mb-3
+          = f.label :"名（First Name）", class: "text-white"
+          = f.text_field :first_name, autocomplete: "first_name", class: "text-white container-fluid orig-input-text sign-up-input"
+        .field.mb-3
+          = f.label :Email, class: "text-white"
+          = f.email_field :email, autocomplete: "email", class: "text-white container-fluid orig-input-text sign-up-input"
+        .field.mb-3.text-white
+          = f.label :Password, class: "text-white mr-4"
+          - if @minimum_password_length
+            em
+              | ※
+              = @minimum_password_length
+              | 文字以上で入力してください
+          br
+          = f.password_field :password, autocomplete: "off", class: "text-white container-fluid orig-input-text sign-up-input"
+        .field.mb-4
+          = f.label :"Password Confirm", class: "text-white"
+          = f.password_field :password_confirmation, autocomplete: "off", class: "text-white container-fluid orig-input-text sign-up-input"
+        .actions.mb-4
+          = f.submit "SIGN UP", class: "btn-block text-white py-3 orig-btn-outline text-light space-1 sign-up-submit"
+        .text-center
+          = render "devise/shared/links"
