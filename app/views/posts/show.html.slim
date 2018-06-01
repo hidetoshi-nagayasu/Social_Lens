@@ -1,9 +1,30 @@
-p#notice
-  = notice
-p
-  strong
-    | Text:
-  = @post.text
-= link_to 'Edit', edit_post_path(@post)
-|  | 
-= link_to 'Back', posts_path
+= render 'common'
+main.bg-light
+  .container
+    = notice
+      p#notice
+    .d-md-flex.pt-4
+      .col-md-6.mx-auto
+        .card.card-shadow
+          .card-header.bg-white
+            = @post.user.last_name
+            .float-right.pointer.pr-2.dropdown
+              span#dropdownMenu.dropdown-toggle.dropdown-arrow-hide data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                i.fa.fa-ellipsis-h.fa-lg
+              ul.dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="dropdownMenu"
+                li.dropdown-item.d-flex
+                  svg#i-edit.pl-0.pt-2 fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
+                    path d=("M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z")
+                  = link_to 'Edit', edit_post_path(@post), class: "dropdown-item pl-2 text-thin"
+          .card-body
+            = simple_format(@post.text)
+            .likebox.mt-4
+              a.pointer
+                svg#i-heart.mx-2 fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
+                  path d=("M4 16 C1 12 2 6 7 4 12 2 15 6 16 8 17 6 21 2 26 4 31 6 31 12 28 16 25 20 16 28 16 28 16 28 7 20 4 16 Z")
+              a.pointer
+                svg#i-msg.mx-2 fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
+                  path d=("M2 4 L30 4 30 22 16 22 8 29 8 22 2 22 Z")
+          .card-footer.bg-white
+            form action="" method="post"
+              input.add-comment-input.col-12.pl-0 type="text" placeholder="Add Comment..."

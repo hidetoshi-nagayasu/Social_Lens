@@ -38,6 +38,10 @@ header {
   }
 }
 
+main {
+  min-height: calc(100% - 58px);
+}
+
 /**************************************
 *              Element
 ***************************************/
@@ -261,13 +265,15 @@ header {
   }
 }
 
-.new-post {
+.new-post,
+.post-submit {
   background: linear-gradient(-135deg, rgb(77, 90, 175), rgb(157, 91, 139));
   color: #fff;
   font-weight: 100;
 }
 
-.new-post-wrapper {
+.new-post-wrapper,
+.edit-post-wrapper {
   min-height: 100px;
 }
 
