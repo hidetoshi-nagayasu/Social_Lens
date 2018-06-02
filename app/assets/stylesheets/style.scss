@@ -97,6 +97,10 @@ footer {
   letter-spacing: 0.1em;
 }
 
+.none {
+  display: none;
+}
+
 /**************************************
 *              Component
 ***************************************/
@@ -282,12 +286,12 @@ footer {
   font-weight: 100;
 }
 
-.new-post-wrapper,
-.edit-post-wrapper {
+.new-post-wrapper {
   min-height: 100px;
 }
 
-.new-post-textarea {
+.post-textarea,
+.post-textarea-edit {
   width: 100%;
   border: none;
   resize: none;

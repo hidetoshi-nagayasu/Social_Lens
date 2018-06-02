@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180526020036) do
+ActiveRecord::Schema.define(version: 20180602051620) do
+
+  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
+    t.text "text", null: false
+    t.string "created_by", limit: 32
+    t.string "updated_by", limit: 32
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "is_deleted", limit: 1, default: 0, null: false
+    t.datetime "deleted_at"
+  end
 
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "text"

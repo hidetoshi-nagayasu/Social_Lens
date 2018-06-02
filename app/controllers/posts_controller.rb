@@ -5,14 +5,16 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all.order('id DESC')
+    @posts = Post.includes(:user).all.order('id DESC')
     @post = Post.new
+    @comments = Comment.includes(:post).all
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments.includes(:user)
   end
 
   # GET /posts/new
@@ -32,7 +34,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to @post, notice: '投稿完了しました。', class: "alert alert-success" }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -46,7 +48,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { redirect_to @post, notice: '編集完了しました。' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
@@ -60,7 +62,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to posts_url, notice: '削除完了しました。' }
       format.json { head :no_content }
     end
   end
