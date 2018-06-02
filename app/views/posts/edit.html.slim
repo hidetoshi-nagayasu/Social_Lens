@@ -1,4 +1,4 @@
-= render 'common'
+= render 'header'
 main.bg-light
   .container
     .d-md-flex.pt-4
@@ -9,10 +9,11 @@ main.bg-light
               = @post.user.last_name
             .card-body
               .field.edit-post-wrapper
-                = f.text_area :text, id: :post_text, class: "new-post-textarea"
+                = f.text_area :text, id: :post_text, class: "new-post-textarea", autofocus: true
               .field
                 svg#i-photo fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
                   path d=("M20 24 L12 16 2 26 2 2 30 2 30 24 M16 20 L22 14 30 22 30 30 2 30 2 24")
                   circle cx="10" cy="9" r="3"
               .action
                 = f.submit "Done", class: "btn btn-block py-2 post-submit"
+= render 'footer'
