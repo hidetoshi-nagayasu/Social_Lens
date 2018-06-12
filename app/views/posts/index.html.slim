@@ -15,7 +15,7 @@ main.bg-light
           -# Post Card
           .card.mb-5.card-shadow
             .card-header.bg-white
-              = post.user.last_name
+              = post.user.user_name
               .float-right.pointer.pr-2.dropdown
                 span#dropdownMenu.dropdown-toggle.dropdown-arrow-hide data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                   i.fa.fa-ellipsis-h.fa-lg
@@ -26,30 +26,30 @@ main.bg-light
                       circle cx="16" cy="16" r="6"
                       path d=("M2 16 C2 16 7 6 16 6 25 6 30 16 30 16 30 16 25 26 16 26 7 26 2 16 2 16 Z") 
                     = link_to 'Show', post, class: "dropdown-item pl-2 text-thin"
-                  li.dropdown-item.d-flex
-                    svg#i-edit.pl-0.pt-2 fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
-                      path d=("M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z")
-                    = link_to 'Edit', edit_post_path(post), class: "dropdown-item pl-2 text-thin"
-                  .dropdown-divider
-                  li.dropdown-item.d-flex
-                    svg#i-trash.pl-0.pt-2.text-danger fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
-                      path d=("M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6")
-                    = link_to 'Delete', post, method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "dropdown-item pl-2 text-thin text-danger"
+                  - if post.user.id == current_user.id
+                    li.dropdown-item.d-flex
+                      svg#i-edit.pl-0.pt-2 fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
+                        path d=("M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z")
+                      = link_to 'Edit', edit_post_path(post), class: "dropdown-item pl-2 text-thin"
+                    .dropdown-divider
+                    li.dropdown-item.d-flex
+                      svg#i-trash.pl-0.pt-2.text-danger fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
+                        path d=("M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6")
+                      = link_to 'Delete', post, method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "dropdown-item pl-2 text-thin text-danger"
 
             .card-body
               = simple_format(post.text)
-              .likebox.mt-4
-                a.pointer
-                  svg#i-heart.mx-2 fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
-                    path d=("M4 16 C1 12 2 6 7 4 12 2 15 6 16 8 17 6 21 2 26 4 31 6 31 12 28 16 25 20 16 28 16 28 16 28 7 20 4 16 Z")
-                a.pointer.comment-icon
-                  svg#i-msg.mx-2 fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
-                    path d=("M2 4 L30 4 30 22 16 22 8 29 8 22 2 22 Z")
+              .likebox.mt-4.d-flex.flex-row
+                a.pointer.text-center data-post-id="#{post.id}" id="post-#{post.id}"
+                  = render "likes/like", post: post
+                a.pointer.comment-icon.text-center
+                  = image_tag("comment.svg")
               .comment-area.mt-4
                 - @comments.each do |comment|
                   .comment-one.d-flex
                     - if comment.post.id == post.id
-                      = simple_format(comment.text, class: "mb-1 comment-text")
+                      = simple_format(comment.user.user_name, class: "text-sm text-info mr-3")
+                      = simple_format(comment.text, class: "mb-0 comment-text")
                     - if comment.user.id == current_user.id && comment.post.id == post.id
                       span#commentDropdownMenu.comment-dropdown-menu.dropdown-toggle.dropdown-arrow-hide.ml-auto.pointer.none data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                         i.fa.fa-ellipsis-h

@@ -1,5 +1,10 @@
 $(document).on('turbolinks:load', function() {
 
+    /**
+     * textareaのスクロール高さを取得する関数
+     * @param textareaClass スクロールの高さを取得したいtextareaのclass名
+     * @return Integer 
+     */
     const getTextareaHeight = (textareaClass) => {
         return $('.' + textareaClass).prop('scrollHeight');
     }
@@ -15,7 +20,7 @@ $(document).on('turbolinks:load', function() {
      * textareaの改行に従ってheightが上下する処理
      */
     $('#post_text').on('input', function(e) {
-        if(e.target.scrollHeight > e.target.offsetHeight) {   
+        if(e.target.scrollHeight > e.target.offsetHeight) {
             $(e.target).height(e.target.scrollHeight);
         } else {          
             var lineHeight = Number( $(e.target).css('lineHeight').split('px')[0] );
@@ -28,6 +33,13 @@ $(document).on('turbolinks:load', function() {
                 }
             }
         }
+    });
+
+    /**
+     * 新規投稿モーダル表示時にtextareaにフォーカスする処理
+     */
+    $('#newPostModal').on('shown.bs.modal', function() {
+        $(this).find('textarea').focus();
     });
 
     /**

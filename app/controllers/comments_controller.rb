@@ -9,7 +9,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    Comment.find(params[:id]).destroy
+    now = Time.current
+    Comment.find(params[:id]).update(is_deleted: 1, deleted_at: now)
     redirect_back fallback_location: root_path
   end
 

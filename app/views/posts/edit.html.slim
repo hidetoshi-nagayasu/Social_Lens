@@ -6,7 +6,7 @@ main.bg-light
         .card.card-shadow
           = form_for @post, html: {method: "patch"} do |f|
             .card-header.bg-white
-              = @post.user.last_name
+              = @post.user.user_name
             .card-body
               .field.edit-post-wrapper
                 = f.text_area :text, id: :post_text, class: "post-textarea-edit", autofocus: true

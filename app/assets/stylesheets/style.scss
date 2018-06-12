@@ -6,6 +6,7 @@
 *              Color
 ***************************************/
 
+$color-like: #e96b7c;
 
 /**************************************
 *              Common
@@ -101,6 +102,14 @@ footer {
   display: none;
 }
 
+.text-sm {
+  font-size: small;
+}
+
+.line-height-middle {
+  line-height: 1em;
+}
+
 /**************************************
 *              Component
 ***************************************/
@@ -181,6 +190,10 @@ footer {
   color: #4d5aaf !important;
   background-color: #fff !important;
   cursor: pointer;
+}
+
+input.sign-up-input::placeholder {
+  color: #888 !important;
 }
 
 @media (max-width: 540px) {
@@ -299,4 +312,20 @@ footer {
   &:focus {
     outline: none;
   }
+}
+
+.comment-text {
+  font-size: 0.85em;
+}
+
+.comment-icon,
+.like-icon {
+  width: 50px;
+  height: 40px;
+  line-height: 40px;
+}
+
+.liked {
+  fill: #eb6ea5;
+  outline: none;
 }

@@ -7,14 +7,14 @@ class PostsController < ApplicationController
   def index
     @posts = Post.includes(:user).all.order('id DESC')
     @post = Post.new
-    @comments = Comment.includes(:post).all
+    @comments = Comment.where(is_deleted: 0).includes(:post).all
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments.includes(:user)
+    @comments = @post.comments.where(is_deleted: 0).includes(:user)
   end
 
   # GET /posts/new
