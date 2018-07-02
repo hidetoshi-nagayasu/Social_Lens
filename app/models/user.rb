@@ -8,4 +8,12 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments
   has_many :likes, dependent: :destroy
+
+  has_attached_file :avatar,
+                      styles:  { medium: "300x300#", thumb: "100x100#" }
+                      # url: "/assets/images/avatar" # 画像保存先のURL先
+  validates_attachment_content_type :avatar,
+                                      content_type: ["image/jpg","image/jpeg","image/png","image/gif"],
+                                      presence: true,  # ファイルの存在チェック
+                                      less_than: 5.megabytes # ファイルサイズのチェック
 end

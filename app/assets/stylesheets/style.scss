@@ -6,7 +6,31 @@
 *              Color
 ***************************************/
 
-$color-like: #e96b7c;
+$color-like: #eb6ea5;
+
+/**************************************
+*        Bootstrap Override
+***************************************/
+
+.card {
+  border-radius: 0 !important;
+}
+
+.modal-content {
+  border-radius: 0 !important;
+  box-shadow: 
+    0 16px 24px 2px rgba(0,0,0,0.14), 
+    0 6px 30px 5px rgba(0,0,0,0.12), 
+    0 8px 10px -7px rgba(0,0,0,0.2);
+}
+
+.dropdown-menu {
+  border-radius: 0;
+}
+
+.card-header {
+  padding: 0.8em 1.0em;
+}
 
 /**************************************
 *              Common
@@ -25,7 +49,7 @@ header {
 
   .search-input {
     width: 90%;
-    border-radius: 5px;
+    border-radius: 0.2;
     opacity: 0.3;
     border: none;
     color: #444;
@@ -129,6 +153,47 @@ footer {
 }
 
 /* Button */
+.orig-btn {
+  border-radius: 0.2;
+  box-shadow: 
+    0 2px 2px 0 rgba(0,0,0,0.14),
+    0 3px 1px -2px rgba(0,0,0,0.12),
+    0 1px 5px 0 rgba(0,0,0,0.2)
+}
+
+/* オリジナルボタン */
+.original_btn {
+  border: 1px solid #ddd;
+  padding: 7px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #666;
+  background: linear-gradient(to bottom,#fff 0,#f4f4f4 100%);
+  box-shadow: inset 0px -1px 0px 0px rgba(0, 0, 0, 0.09);
+}
+
+/* 未選択時のアイコン */
+.icon {
+  font-size: 12px;
+  margin: 0 10px 0 15px;
+  padding: 3px 30px;
+  border-radius: 15px;
+  background: #666;
+  color: #fff;
+  display: inline-block;
+}
+
+/* 選択時のアイコン */
+.icon.select {
+  background: #b972ab;
+  color: #fff;
+}
+
+/* ファイル名 */
+.filename {
+  display: inline-block;
+  font-size: 12px;
+}
 
 /**************************************
 *              Error
@@ -264,7 +329,31 @@ input.sign-up-input::placeholder {
 }
 
 .card-shadow-deep {
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.19);
+}
+
+.card-header-right {
+  text-align: center;
+  min-height: 30px;
+  min-width: 30px;
+}
+
+.card-header-right > span {
+  display: block;
+  min-height: 30px;
+  min-width: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  transition: 0.2s;
+  
+  &:hover {
+    background-color: #f0f0f0;
+    opacity: 0.9;
+  }
+}
+
+.more-icon {
+  fill: #999;
 }
 
 .likebox {
@@ -326,6 +415,10 @@ input.sign-up-input::placeholder {
 }
 
 .liked {
-  fill: #eb6ea5;
+  fill: $color-like;
   outline: none;
+}
+
+.unknown-icon {
+  opacity: 0.6;
 }

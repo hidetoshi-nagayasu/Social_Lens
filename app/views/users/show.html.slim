@@ -1,0 +1,32 @@
+= render 'posts/header'
+main.bg-light
+  .col-md-6.pt-4.mx-auto
+    .card
+      .card-header
+        | アカウント詳細
+      .card-body
+        table.table.table-bordered
+          tbody
+            tr
+              td.w-25
+                | フルネーム
+              td
+                = current_user.full_name
+            tr
+              td
+                | ユーザー名
+              td
+                = current_user.user_name
+            tr
+              td
+                | メールアドレス
+              td
+                = current_user.email
+            tr
+              td
+                | 自己紹介
+              td
+                = simple_format(current_user.introduction)
+        .text-right
+          = link_to "アカウントを編集する", edit_user_registration_path, class: "mt-4 text-sm"
+= render 'posts/footer'

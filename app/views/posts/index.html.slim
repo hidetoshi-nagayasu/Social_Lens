@@ -15,10 +15,16 @@ main.bg-light
           -# Post Card
           .card.mb-5.card-shadow
             .card-header.bg-white
+              - if post.user.avatar?
+                = image_tag post.user.avatar, size: "30x30", class: "rounded-circle mr-2"
+              - else
+                = image_tag "account.png", size: "30x30", class: "unknown-icon mr-2"
               = post.user.user_name
-              .float-right.pointer.pr-2.dropdown
+              .float-right.pointer.dropdown.card-header-right
                 span#dropdownMenu.dropdown-toggle.dropdown-arrow-hide data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                  i.fa.fa-ellipsis-h.fa-lg
+                  svg.more-icon height="20" viewbox=("0 0 24 16") width="22" xmlns="http://www.w3.org/2000/svg" class="text-light"
+                    path d=("M0 0h24v24H0z") fill="none"
+                    path d=("M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z")
                 ul.dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="dropdownMenu"
                   li.dropdown-item.d-flex
                     svg#i-eye.pl-0.pt-2 fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
@@ -52,7 +58,9 @@ main.bg-light
                       = simple_format(comment.text, class: "mb-0 comment-text")
                     - if comment.user.id == current_user.id && comment.post.id == post.id
                       span#commentDropdownMenu.comment-dropdown-menu.dropdown-toggle.dropdown-arrow-hide.ml-auto.pointer.none data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                        i.fa.fa-ellipsis-h
+                        svg.more-icon height="18" viewbox=("0 0 24 24") width="18" xmlns="http://www.w3.org/2000/svg" class="text-light"
+                          path d=("M0 0h24v24H0z") fill="none"
+                          path d=("M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z")
                       ul.dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="commentDropdownMenu"
                         li.dropdown-item
                           = link_to 'Edit', "/posts/#{post.id}/comments/#{comment.id}/edit", class: "dropdown-item pl-2 text-thin"
@@ -63,7 +71,7 @@ main.bg-light
               = form_tag("/posts/#{post.id}/comments", method: :post) do
                 input.add-comment-input.col-12.pl-0 type="text" name="text" placeholder="Add Comment..."
       .col-md-4
-        button.btn.col-6.text-white.text-center.py-2.new-post data-toggle="modal" data-target="#newPostModal"
+        button.btn.col-6.text-white.text-center.py-2.new-post.orig-btn data-toggle="modal" data-target="#newPostModal"
           | New Post
 
         -# New Post Modal
@@ -87,5 +95,5 @@ main.bg-light
                         path d=("M20 24 L12 16 2 26 2 2 30 2 30 24 M16 20 L22 14 30 22 30 30 2 30 2 24")
                         circle cx="10" cy="9" r="3"
                   .action
-                    = f.submit "Create", class: "btn btn-block py-2 post-submit"
+                    = f.submit "Create", class: "btn btn-block py-3 mt-3 post-submit"
 = render 'footer'
