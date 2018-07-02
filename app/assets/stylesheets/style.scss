@@ -420,5 +420,20 @@ input.sign-up-input::placeholder {
 }
 
 .unknown-icon {
-  opacity: 0.6;
+  border-radius: 50%;
+}
+
+/**************************************
+*              My Page
+***************************************/
+.profile-image {
+  min-height: inherit;
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
 }

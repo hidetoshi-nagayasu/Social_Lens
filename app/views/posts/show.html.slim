@@ -15,8 +15,9 @@ main.bg-light
             - if @post.user.avatar?
               = image_tag @post.user.avatar, size: "25x25", class: "rounded-circle mr-2"
             - else
-              = image_tag "account.png", size: "25x25", class: "unknown-icon mr-2"
-            = @post.user.user_name
+              = image_tag "account_default.jpg", size: "25x25", class: "unknown-icon mr-2"
+            span.user-name.align-middle
+              = @post.user.user_name
             .float-right.pointer.dropdown
               - if @post.user.id == current_user.id
                 span#dropdownMenu.dropdown-toggle.dropdown-arrow-hide data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"

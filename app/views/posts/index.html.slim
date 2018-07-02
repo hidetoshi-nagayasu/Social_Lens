@@ -18,8 +18,9 @@ main.bg-light
               - if post.user.avatar?
                 = image_tag post.user.avatar, size: "30x30", class: "rounded-circle mr-2"
               - else
-                = image_tag "account.png", size: "30x30", class: "unknown-icon mr-2"
-              = post.user.user_name
+                = image_tag "account_default.jpg", size: "30x30", class: "unknown-icon mr-2"
+              span.user-name.align-middle
+                = post.user.user_name
               .float-right.pointer.dropdown.card-header-right
                 span#dropdownMenu.dropdown-toggle.dropdown-arrow-hide data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                   svg.more-icon height="20" viewbox=("0 0 24 16") width="22" xmlns="http://www.w3.org/2000/svg" class="text-light"

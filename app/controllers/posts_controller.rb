@@ -68,9 +68,10 @@ class PostsController < ApplicationController
   end
 
   def mypage
-    @posts = Post.order('id DESC').where user_id: current_user.id
+    @posts = Post.order('id DESC').where(user_id: current_user.id)
     @comments = Comment.where(is_deleted: 0).includes(:post).all
-    @count = Post.where(user_id: current_user.id).count
+    @post_count = Post.where(user_id: current_user.id).count
+    @like_count = Like.where(user_id: current_user.id).count
   end
 
   private

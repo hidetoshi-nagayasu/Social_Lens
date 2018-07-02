@@ -6,7 +6,12 @@ main.bg-light
         .card.card-shadow
           = form_for @post, html: {method: "patch"} do |f|
             .card-header.bg-white
-              = @post.user.user_name
+              - if @post.user.avatar?
+                = image_tag @post.user.avatar, size: "30x30", class: "rounded-circle mr-2"
+              - else
+                = image_tag "account_default.jpg", size: "30x30", class: "unknown-icon mr-2"
+              span.user-name.align-middle
+                = @post.user.user_name
             .card-body
               .field.edit-post-wrapper
                 = f.text_area :text, id: :post_text, class: "post-textarea-edit", autofocus: true
@@ -15,5 +20,5 @@ main.bg-light
                   path d=("M20 24 L12 16 2 26 2 2 30 2 30 24 M16 20 L22 14 30 22 30 30 2 30 2 24")
                   circle cx="10" cy="9" r="3"
               .action
-                = f.submit "Done", class: "btn btn-block py-2 post-submit"
+                = f.submit "Done", class: "btn btn-block py-3 mt-3 post-submit"
 = render 'footer'

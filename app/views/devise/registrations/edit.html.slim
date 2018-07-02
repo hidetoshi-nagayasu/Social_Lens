@@ -11,13 +11,21 @@ main.bg-light
             = f.label :avatar, class: "col-sm-3 col-form-label text-right"
               | プロフィール写真
             .col-sm-9
-              = image_tag current_user.avatar, size: "180x180", class: "mb-3"
+              - if current_user.avatar?
+                = image_tag current_user.avatar, size: "180x180", class: "mb-3"
+              - else
+                = image_tag "account_default.jpg", size: "180x180", class: "mb-3"
               #js-selectFile
                 = f.file_field :avatar, class: "js-upload none"
                 button.original_btn
                   | ファイルを選択
                 span.icon
                   | 未選択
+          .form-group.row.field
+            = f.label :full_name, class: "col-sm-3 col-form-label text-right"
+              | フルネーム
+            .col-sm-9
+              = f.text_field :full_name, class: "form-control"
           .form-group.row.field
             = f.label :user_name, class: "col-sm-3 col-form-label text-right"
               | ユーザー名

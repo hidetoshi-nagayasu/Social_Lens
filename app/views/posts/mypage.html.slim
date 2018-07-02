@@ -5,9 +5,14 @@ main.bg-light.pb-1
       .profile-image.col-sm-4.text-center
         - if current_user.avatar?
           = image_tag current_user.avatar, size: "180x180"
+        - else
+          = image_tag "account_default.jpg", size: "180x180"
       .user-info.col-sm-8.py-3
-        h1
-          = current_user.user_name
+        .d-flex
+          h1
+            = current_user.user_name
+          - if current_user
+            = link_to "プロフィールを編集", edit_user_registration_path, class: "btn btn-link text-sm ml-auto text-muted"
         p
           = simple_format(current_user.introduction)
     .col-10.mb-3.mx-auto
@@ -15,13 +20,15 @@ main.bg-light.pb-1
         .p-3
           | 投稿数：
           span
-            = @count
+            = @post_count
         .p-3
           | フォロワー：
         .p-3
           | フォロー：
         .p-3
-          | いいね！
+          | いいね：
+          span
+            = @like_count
 
     .col-md-6.mx-auto
       -# Post Card
@@ -32,7 +39,8 @@ main.bg-light.pb-1
               = image_tag post.user.avatar, size: "25x25", class: "rounded-circle mr-2"
             - else
               = image_tag "account.png", size: "25x25", class: "unknown-icon mr-2"
-            = post.user.user_name
+            span.user-name.align-middle
+              = post.user.user_name
             .float-right.pointer.dropdown.card-header-right
                   span#dropdownMenu.dropdown-toggle.dropdown-arrow-hide data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                     svg.more-icon height="20" viewbox=("0 0 24 16") width="22" xmlns="http://www.w3.org/2000/svg" class="text-light"
