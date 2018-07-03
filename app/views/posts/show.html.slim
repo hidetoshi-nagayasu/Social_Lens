@@ -13,15 +13,15 @@ main.bg-light
         .card.card-shadow
           .card-header.bg-white
             - if @post.user.avatar?
-              = image_tag @post.user.avatar, size: "25x25", class: "rounded-circle mr-2"
+              = image_tag @post.user.avatar, size: "30x30", class: "rounded-circle mr-2"
             - else
-              = image_tag "account_default.jpg", size: "25x25", class: "unknown-icon mr-2"
+              = image_tag "account_default.jpg", size: "30x30", class: "unknown-icon mr-2"
             span.user-name.align-middle
               = @post.user.user_name
-            .float-right.pointer.dropdown
+            .float-right.pointer.dropdown.card-header-right
               - if @post.user.id == current_user.id
                 span#dropdownMenu.dropdown-toggle.dropdown-arrow-hide data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                  svg.more-icon height="24" viewbox=("0 0 24 24") width="24" xmlns="http://www.w3.org/2000/svg" class="text-light"
+                  svg.more-icon height="20" viewbox=("0 0 24 16") width="22" xmlns="http://www.w3.org/2000/svg" class="text-light"
                     path d=("M0 0h24v24H0z") fill="none"
                     path d=("M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z")
                 ul.dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="dropdownMenu"
