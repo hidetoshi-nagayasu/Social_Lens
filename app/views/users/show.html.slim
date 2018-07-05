@@ -26,7 +26,7 @@ main.bg-light
               td
                 | 自己紹介
               td
-                = simple_format(current_user.introduction)
+                = text_url_to_link(h(simple_format(current_user.introduction))).html_safe
         .text-right
           = link_to "アカウントを編集する", edit_user_registration_path, class: "mt-4 text-sm"
 = render 'posts/footer'

@@ -81,6 +81,25 @@ footer {
 *              Element
 ***************************************/
 
+/* In post <a> </a> */
+.post-link {
+  color: #50b8d9;
+  transition: 0.1s;
+  position: relative;
+
+  &:hover:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    width: 104%;
+    height: 130%;
+    padding: 0.4em;
+    background-color: rgba(255,234,0,0.2);
+  }
+}
+
 /* Show horizon line both of text */
 .text-horizon-line {
   display: flex;
@@ -421,19 +440,4 @@ input.sign-up-input::placeholder {
 
 .unknown-icon {
   border-radius: 50%;
-}
-
-/**************************************
-*              My Page
-***************************************/
-.profile-image {
-  min-height: inherit;
-  position: relative;
-
-  img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
-  }
 }

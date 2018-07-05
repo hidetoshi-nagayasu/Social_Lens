@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root 'posts#index'
   devise_for :users
-  get 'users/:id' => 'users#show'
+  get 'users/:id'  => 'users#show'
+  get 'posts'      => 'posts#index'
   get ':user_name' => 'posts#mypage'
   resources :posts do
     resources :comments, only: [:create, :edit, :destroy]

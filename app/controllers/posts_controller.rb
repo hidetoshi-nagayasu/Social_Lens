@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.includes(:user).all.order('id DESC')
+    @posts = Post.includes(:user).where(is_deleted: 0).order('id DESC')
     @post = Post.new
     @comments = Comment.where(is_deleted: 0).includes(:post).all
   end
@@ -60,7 +60,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    @post.destroy
+    @post.update(is_deleted: 1, deleted_at: DateTime.now)
     respond_to do |format|
       format.html { redirect_to posts_url, notice: '削除完了しました。' }
       format.json { head :no_content }
@@ -68,7 +68,7 @@ class PostsController < ApplicationController
   end
 
   def mypage
-    @posts = Post.order('id DESC').where(user_id: current_user.id)
+    @posts = Post.order('id DESC').where(user_id: current_user.id, is_deleted: 0)
     @comments = Comment.where(is_deleted: 0).includes(:post).all
     @post_count = Post.where(user_id: current_user.id).count
     @like_count = Like.where(user_id: current_user.id).count

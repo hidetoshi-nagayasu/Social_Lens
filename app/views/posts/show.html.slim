@@ -24,13 +24,13 @@ main.bg-light
                   svg.more-icon height="20" viewbox=("0 0 24 16") width="22" xmlns="http://www.w3.org/2000/svg" class="text-light"
                     path d=("M0 0h24v24H0z") fill="none"
                     path d=("M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z")
-                ul.dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="dropdownMenu"
-                  li.dropdown-item.d-flex
-                    svg#i-edit.pl-0.pt-2 fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
+                .dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="dropdownMenu"
+                  = link_to edit_post_path(@post), class: "dropdown-item px-auto py-2 text-thin d-flex"
+                    svg#i-edit.mr-3.my-auto fill="none" height="20" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="20"
                       path d=("M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z")
-                    = link_to 'Edit', edit_post_path(@post), class: "dropdown-item pl-2 text-thin"
+                    | Edit
           .card-body
-            = simple_format(@post.text)
+            = text_url_to_link(h(simple_format(@post.text))).html_safe
             .likebox.mt-4.d-flex.flex-row
               a.pointer.text-center data-post-id="#{@post.id}" id="post-#{@post.id}"
                 = render "likes/like", post: @post
@@ -40,7 +40,7 @@ main.bg-light
                 - @comments.each do |comment|
                   .comment-one.d-flex
                     = simple_format(comment.user.user_name, class: "text-sm text-info mr-3")
-                    = simple_format(comment.text, class: "mb-1 comment-text")
+                    = text_url_to_link(h(simple_format(comment.text, class: "mb-0 comment-text"))).html_safe
                     - if comment.user.id == current_user.id
                       span#commentDropdownMenu.comment-dropdown-menu.dropdown-toggle.dropdown-arrow-hide.ml-auto.pointer.none data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                         i.fa.fa-ellipsis-h
