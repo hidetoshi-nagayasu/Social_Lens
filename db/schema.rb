@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180705133725) do
+ActiveRecord::Schema.define(version: 20180706134807) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20180705133725) do
     t.integer "likes_count", default: 0, null: false
     t.integer "is_deleted", limit: 1, default: 0, null: false
     t.datetime "deleted_at"
+    t.text "images"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

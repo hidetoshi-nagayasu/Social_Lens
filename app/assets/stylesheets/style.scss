@@ -137,6 +137,10 @@ footer {
   font-weight: 100;
 }
 
+.text-bold {
+  font-weight: bold;
+}
+
 .space-1 {
   letter-spacing: 0.1em;
 }
@@ -212,6 +216,29 @@ footer {
 .filename {
   display: inline-block;
   font-size: 12px;
+}
+
+/* Box Shadow */
+.box-shadow-sm {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.box-shadow-md {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.box-shadow-lg {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.box-shadow-xl {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.box-shadow-hover:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 /**************************************
@@ -440,4 +467,36 @@ input.sign-up-input::placeholder {
 
 .unknown-icon {
   border-radius: 50%;
+}
+
+.image-icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  transition: 0.1s;
+
+  &:hover:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    border-radius: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
+}
+
+.card-body-nopadding {
+  padding: 0;
 }

@@ -30,7 +30,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(text: post_params[:text], user_id: current_user.id)
+    @post = Post.new(text: post_params[:text], user_id: current_user.id, images: post_params[:images])
 
     respond_to do |format|
       if @post.save
@@ -80,8 +80,14 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
+    # def add_more_images(new_images)
+    #   images = @post.images 
+    #   images += new_images
+    #   @post.images = images
+    # end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:text, :last_name)
+      params.require(:post).permit(:text, :last_name, {images: []})
     end
 end

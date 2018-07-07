@@ -29,26 +29,56 @@ main.bg-light
                     svg#i-edit.mr-3.my-auto fill="none" height="20" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="20"
                       path d=("M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z")
                     | Edit
-          .card-body
-            = text_url_to_link(h(simple_format(@post.text))).html_safe
-            .likebox.mt-4.d-flex.flex-row
-              a.pointer.text-center data-post-id="#{@post.id}" id="post-#{@post.id}"
-                = render "likes/like", post: @post
-              a.pointer.comment-icon.text-center
-                = image_tag("comment.svg")
-            .comment-area.mt-4
-                - @comments.each do |comment|
-                  .comment-one.d-flex
-                    = simple_format(comment.user.user_name, class: "text-sm text-info mr-3")
-                    = text_url_to_link(h(simple_format(comment.text, class: "mb-0 comment-text"))).html_safe
-                    - if comment.user.id == current_user.id
-                      span#commentDropdownMenu.comment-dropdown-menu.dropdown-toggle.dropdown-arrow-hide.ml-auto.pointer.none data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                        i.fa.fa-ellipsis-h
-                      ul.dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="commentDropdownMenu"
-                        li.dropdown-item
-                          = link_to 'Edit', "/posts/#{@post.id}/comments/#{comment.id}/edit", class: "dropdown-item pl-2 text-thin"
-                        li.dropdown-item
-                          = link_to 'Delete', "/posts/#{@post.id}/comments/#{comment.id}", method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "dropdown-item pl-2 text-thin text-danger"
+          .card-body.card-body-nopadding
+            - if @post.images?
+              - if @post.images.length == 1
+                = image_tag @post.images[0], class: "w-100"
+              - else
+                #carouselIndicators.carousel.slide data-ride="carousel"
+                  ol.carousel-indicators
+                    - @post.images.each_with_index do |image, i|
+                      - if ( i == 0 )
+                        li.active data-target="#carouselIndicators" data-slide-to="#{i}"
+                      - else
+                        li data-target="#carouselIndicators" data-slide-to="#{i}"
+                  .carousel-inner
+                    - @post.images.each_with_index do |image, i|
+                      - if ( i == 0 )
+                        .carousel-item.active
+                          = image_tag image, class: "w-100"
+                      - else
+                        .carousel-item
+                          = image_tag image, class: "w-100"
+                  a.carousel-control-prev data-slide="prev" href="#carouselIndicators" role="button" 
+                    span.carousel-control-prev-icon aria-hidden="true" 
+                    span.sr-only Previous
+                  a.carousel-control-next data-slide="next" href="#carouselIndicators" role="button" 
+                    span.carousel-control-next-icon aria-hidden="true" 
+                    span.sr-only Next
+            .post-body.p-3
+              = text_url_to_link(h(simple_format(@post.text))).html_safe
+              .likebox.d-flex.flex-row
+                a.pointer.text-center data-post-id="#{@post.id}" id="post-#{@post.id}"
+                  = render "likes/like", post: @post
+                a.pointer.comment-icon.text-center
+                  = image_tag("comment.svg")
+              .comment-area.mt-3
+                  - @comments.each do |comment|
+                    .comment-one.d-flex
+                      - if comment.user.avatar?
+                        = image_tag comment.user.avatar, size: "20x20", class: "rounded-circle mr-2"
+                      - else
+                        = image_tag "account_default.jpg", size: "20x20", class: "unknown-icon mr-2"
+                      = simple_format(comment.user.user_name, class: "text-sm text-muted text-bold mr-3")
+                      = text_url_to_link(h(simple_format(comment.text, class: "mb-0 comment-text"))).html_safe
+                      - if comment.user.id == current_user.id
+                        span#commentDropdownMenu.comment-dropdown-menu.dropdown-toggle.dropdown-arrow-hide.ml-auto.pointer.none data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                          i.fa.fa-ellipsis-h
+                        ul.dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="commentDropdownMenu"
+                          li.dropdown-item
+                            = link_to 'Edit', "/posts/#{@post.id}/comments/#{comment.id}/edit", class: "dropdown-item pl-2 text-thin"
+                          li.dropdown-item
+                            = link_to 'Delete', "/posts/#{@post.id}/comments/#{comment.id}", method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "dropdown-item pl-2 text-thin text-danger"
 
           .card-footer.bg-white
             = form_tag("/posts/#{@post.id}/comments", method: :post) do

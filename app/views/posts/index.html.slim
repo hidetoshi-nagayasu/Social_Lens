@@ -13,7 +13,7 @@ main.bg-light
         - @posts.each do |post|
 
           -# Post Card
-          .card.mb-5.card-shadow
+          .card.mb-5.box-shadow-sm.box-shadow-hover
             .card-header.bg-white
               - if post.user.avatar?
                 = image_tag post.user.avatar, size: "30x30", class: "rounded-circle mr-2"
@@ -44,29 +44,59 @@ main.bg-light
                         path d=("M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6")
                       | Delete
 
-            .card-body
-              = text_url_to_link(h(simple_format(post.text))).html_safe
-              .likebox.mt-4.d-flex.flex-row
-                a.pointer.text-center data-post-id="#{post.id}" id="post-#{post.id}"
-                  = render "likes/like", post: post
-                a.pointer.comment-icon.text-center
-                  = image_tag("comment.svg")
-              .comment-area.mt-4
-                - @comments.each do |comment|
-                  .comment-one.d-flex
-                    - if comment.post.id == post.id
-                      = simple_format(comment.user.user_name, class: "text-sm text-info mr-3")
-                      = text_url_to_link(h(simple_format(comment.text, class: "mb-0 comment-text"))).html_safe
-                    - if comment.user.id == current_user.id && comment.post.id == post.id
-                      span#commentDropdownMenu.comment-dropdown-menu.dropdown-toggle.dropdown-arrow-hide.ml-auto.pointer.none data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                        svg.more-icon height="18" viewbox=("0 0 24 24") width="18" xmlns="http://www.w3.org/2000/svg" class="text-light"
-                          path d=("M0 0h24v24H0z") fill="none"
-                          path d=("M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z")
-                      ul.dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="commentDropdownMenu"
-                        li.dropdown-item
-                          = link_to 'Edit', "/posts/#{post.id}/comments/#{comment.id}/edit", class: "dropdown-item pl-2 text-thin"
-                        li.dropdown-item
-                          = link_to 'Delete', "/posts/#{post.id}/comments/#{comment.id}", method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "dropdown-item pl-2 text-thin text-danger"
+            .card-body.card-body-nopadding
+              - if post.images?
+                - if post.images.length == 1
+                  = image_tag post.images[0], class: "w-100"
+                - else
+                  #carouselIndicators.carousel.slide data-ride="carousel"
+                    ol.carousel-indicators
+                      - post.images.each_with_index do |image, i|
+                        - if ( i == 0 )
+                          li.active data-target="#carouselIndicators" data-slide-to="#{i}"
+                        - else
+                          li data-target="#carouselIndicators" data-slide-to="#{i}"
+                    .carousel-inner
+                      - post.images.each_with_index do |image, i|
+                        - if ( i == 0 )
+                          .carousel-item.active
+                            = image_tag image, class: "w-100"
+                        - else
+                          .carousel-item
+                            = image_tag image, class: "w-100"
+                    a.carousel-control-prev data-slide="prev" href="#carouselIndicators" role="button" 
+                      span.carousel-control-prev-icon aria-hidden="true" 
+                      span.sr-only Previous
+                    a.carousel-control-next data-slide="next" href="#carouselIndicators" role="button" 
+                      span.carousel-control-next-icon aria-hidden="true" 
+                      span.sr-only Next
+              .post-body.p-3
+                = text_url_to_link(h(simple_format(post.text))).html_safe
+                .likebox.d-flex.flex-row
+                  a.pointer.text-center data-post-id="#{post.id}" id="post-#{post.id}"
+                    = render "likes/like", post: post
+                  a.pointer.comment-icon.text-center
+                    = image_tag("comment.svg")
+                .comment-area.mt-3
+                  - @comments.each do |comment|
+                    .comment-one.d-flex
+                      - if comment.post.id == post.id
+                        - if comment.user.avatar?
+                          = image_tag comment.user.avatar, size: "20x20", class: "rounded-circle mr-2"
+                        - else
+                          = image_tag "account_default.jpg", size: "20x20", class: "unknown-icon mr-2"
+                        = simple_format(comment.user.user_name, class: "text-sm text-muted text-bold mr-3")
+                        = text_url_to_link(h(simple_format(comment.text, class: "mb-0 comment-text"))).html_safe
+                      - if comment.user.id == current_user.id && comment.post.id == post.id
+                        span#commentDropdownMenu.comment-dropdown-menu.dropdown-toggle.dropdown-arrow-hide.ml-auto.pointer.none data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                          svg.more-icon height="18" viewbox=("0 0 24 24") width="18" xmlns="http://www.w3.org/2000/svg" class="text-light"
+                            path d=("M0 0h24v24H0z") fill="none"
+                            path d=("M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z")
+                        ul.dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="commentDropdownMenu"
+                          li.dropdown-item
+                            = link_to 'Edit', "/posts/#{post.id}/comments/#{comment.id}/edit", class: "dropdown-item pl-2 text-thin"
+                          li.dropdown-item
+                            = link_to 'Delete', "/posts/#{post.id}/comments/#{comment.id}", method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "dropdown-item pl-2 text-thin text-danger"
 
             .card-footer.bg-white
               = form_tag("/posts/#{post.id}/comments", method: :post) do
@@ -91,10 +121,15 @@ main.bg-light
                 = form_for @post, html: {method: "post"} do |f|
                   .field.new-post-wrapper
                     = f.text_area :text, id: :post_text, class: "post-textarea", placeholder: "Post text...", rows: 8
+                  .post-image-thumb.text-center
+                    span
                   .field
-                      svg#i-photo fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
-                        path d=("M20 24 L12 16 2 26 2 2 30 2 30 24 M16 20 L22 14 30 22 30 30 2 30 2 24")
-                        circle cx="10" cy="9" r="3"
+                    #post-image-upload
+                      = f.file_field :images, multiple: true, id: "input-image-file", class: "none"
+                      span.pointer.image-icon
+                        svg#i-photo fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
+                          path d=("M20 24 L12 16 2 26 2 2 30 2 30 24 M16 20 L22 14 30 22 30 30 2 30 2 24")
+                          circle cx="10" cy="9" r="3"
                   .action
-                    = f.submit "Create", class: "btn btn-block py-3 mt-3 post-submit"
+                    = f.submit "Create", class: "btn btn-block py-3 post-submit"
 = render 'footer'

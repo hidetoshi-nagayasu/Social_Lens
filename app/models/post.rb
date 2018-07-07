@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   has_many :comments
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
+  mount_uploaders :images, ImageUploader
+  serialize :images, JSON
 
   def like(user)
     likes.create(user_id: user.id)

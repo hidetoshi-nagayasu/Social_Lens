@@ -43,6 +43,14 @@ $(document).on('turbolinks:load', function() {
     });
 
     /**
+     * 新規投稿モーダルを閉じる時にinput項目とサムネイル画像を初期化する処理
+     */
+    $('#newPostModal').on('hidden.bs.modal', function() {
+        $(this).find('input[type=file], textarea').val('');
+        $(this).find('.post-image-thumb span').empty();
+    });
+
+    /**
      * コメントアイコンのクリック時にコメントinputにフォーカスする処理
      */
     $('.comment-icon').on('click', function() {
@@ -60,6 +68,14 @@ $(document).on('turbolinks:load', function() {
             $(this).find('.comment-dropdown-menu').hide();
         }
     );
+
+    /**
+     * 投稿時の画像アップロードボタン押下時の処理
+     */
+    $('#post-image-upload').on('click', '.image-icon', function() {
+        $('#input-image-file').click();
+        return false;
+    });
 
     /**
      * ファイルアップロードボタン押下時の処理
@@ -85,4 +101,36 @@ $(document).on('turbolinks:load', function() {
         $('.filename').html('ファイル名：' + file.name);
     });
 
+    /**
+     * 新規投稿で画像アップロードのサムネイル表示処理
+     */
+    // $('.post-image-thumb').append('<span></span>');
+
+    $('#input-image-file').change(function() {
+        $('.post-image-thumb span').html('');
+        let file = $(this).prop('files');
+    
+        let img_count = 1;
+        $(file).each(function(i) {
+            // 5枚まで
+            if (img_count > 5) {
+            return false;
+            }
+
+            if (! file[i].type.match('image.*')) {
+            $(this).val('');
+            $('.post-image-thumb span').html('');
+            return;
+            }
+    
+            let reader = new FileReader();
+            reader.onload = function() {
+            let img_src = $('<img class="mx-1" width="auto" height="80px">').attr('src', reader.result);
+            $('.post-image-thumb span').append(img_src);
+            }
+            reader.readAsDataURL(file[i]);
+            
+            img_count = img_count + 1;
+        });
+    });
 });
