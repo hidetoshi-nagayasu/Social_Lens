@@ -29,6 +29,10 @@ main.bg-light
                     svg#i-edit.mr-3.my-auto fill="none" height="20" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="20"
                       path d=("M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z")
                     | Edit
+                  = link_to @post, method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "dropdown-item px-auto py-2 text-thin text-danger d-flex"
+                    svg#i-trash.mr-3.my-auto.text-danger fill="none" height="20" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="20"
+                      path d=("M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6")
+                    | Delete
           .card-body.card-body-nopadding
             - if @post.images?
               - if @post.images.length == 1
@@ -49,10 +53,10 @@ main.bg-light
                       - else
                         .carousel-item
                           = image_tag image, class: "w-100"
-                  a.carousel-control-prev data-slide="prev" href="#carouselIndicators" role="button" 
+                  a.carousel-control-prev.carousel-control data-slide="prev" href="#carouselIndicators" role="button" 
                     span.carousel-control-prev-icon aria-hidden="true" 
                     span.sr-only Previous
-                  a.carousel-control-next data-slide="next" href="#carouselIndicators" role="button" 
+                  a.carousel-control-next.carousel-control data-slide="next" href="#carouselIndicators" role="button" 
                     span.carousel-control-next-icon aria-hidden="true" 
                     span.sr-only Next
             .post-body.p-3

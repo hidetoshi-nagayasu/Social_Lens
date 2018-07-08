@@ -1,6 +1,13 @@
 $(document).on('turbolinks:load', function() {
 
     /**
+     * Bootstrap Carousel
+     */
+    $('.carousel').carousel({
+        interval: 0
+      });
+
+    /**
      * textareaのスクロール高さを取得する関数
      * @param textareaClass スクロールの高さを取得したいtextareaのclass名
      * @return Integer 
@@ -104,19 +111,19 @@ $(document).on('turbolinks:load', function() {
     /**
      * 新規投稿で画像アップロードのサムネイル表示処理
      */
-    // $('.post-image-thumb').append('<span></span>');
-
     $('#input-image-file').change(function() {
         $('.post-image-thumb span').html('');
         let file = $(this).prop('files');
+
+        // 10枚まで
+        if(file.length > 10) {
+            $('.post-image-thumb span').html('<span class="text-danger"><i class="fa fa-exclamation-triangle mr-1"></i>画像は10枚まで選択してください。</span>');
+            $(this).val('');
+            return false;
+        }
     
         let img_count = 1;
         $(file).each(function(i) {
-            // 5枚まで
-            if (img_count > 5) {
-            return false;
-            }
-
             if (! file[i].type.match('image.*')) {
             $(this).val('');
             $('.post-image-thumb span').html('');

@@ -500,3 +500,15 @@ input.sign-up-input::placeholder {
 .card-body-nopadding {
   padding: 0;
 }
+
+.carousel-control {
+  transition: all 0.2s ease;
+}
+
+.carousel-control-prev:hover {
+  background: linear-gradient(to right,rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0));
+}
+
+.carousel-control-next:hover {
+  background: linear-gradient(to left,rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0));
+}
