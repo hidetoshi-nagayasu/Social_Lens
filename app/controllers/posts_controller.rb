@@ -68,10 +68,12 @@ class PostsController < ApplicationController
   end
 
   def mypage
-    @posts = Post.order('id DESC').where(user_id: current_user.id, is_deleted: 0)
+    @user = User.find_by(user_name: params[:user_name])
+    @posts = Post.includes(:user).order('id DESC').where(user_id: @user.id, is_deleted: 0)
     @comments = Comment.where(is_deleted: 0).includes(:post).all
-    @post_count = Post.where(user_id: current_user.id).count
-    @like_count = Like.where(user_id: current_user.id).count
+    @post_count = Post.where(user_id: @user.id).count
+    @like_count = Like.where(user_id: @user.id).count
+    @inbound_like_count = @posts.sum(:likes_count)
   end
 
   private
@@ -79,12 +81,6 @@ class PostsController < ApplicationController
     def set_post
       @post = Post.find(params[:id])
     end
-
-    # def add_more_images(new_images)
-    #   images = @post.images 
-    #   images += new_images
-    #   @post.images = images
-    # end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
