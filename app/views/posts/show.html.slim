@@ -12,12 +12,13 @@ main.bg-light
       .col-md-6.mx-auto
         .card.card-shadow
           .card-header.bg-white
-            - if @post.user.avatar?
-              = image_tag @post.user.avatar, size: "30x30", class: "rounded-circle mr-2"
-            - else
-              = image_tag "account_default.jpg", size: "30x30", class: "unknown-icon mr-2"
-            span.user-name.align-middle.text-secondary.text-bold
-              = @post.user.user_name
+            = link_to "/#{@post.user.user_name}"
+              - if @post.user.avatar?
+                = image_tag @post.user.avatar, size: "30x30", class: "rounded-circle mr-2"
+              - else
+                = image_tag "account_default.jpg", size: "30x30", class: "unknown-icon mr-2"
+              span.user-name.align-middle.text-secondary.text-bold
+                = @post.user.user_name
             .float-right.pointer.dropdown.card-header-right
               - if @post.user.id == current_user.id
                 span#dropdownMenu.dropdown-toggle.dropdown-arrow-hide data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -68,21 +69,28 @@ main.bg-light
                   = image_tag("comment.svg")
               .comment-area.mt-3
                   - @comments.each do |comment|
-                    .comment-one.d-flex
-                      - if comment.user.avatar?
-                        = image_tag comment.user.avatar, size: "20x20", class: "rounded-circle mr-2"
-                      - else
-                        = image_tag "account_default.jpg", size: "20x20", class: "unknown-icon mr-2"
-                      = simple_format(comment.user.user_name, class: "text-sm text-muted text-bold mr-3")
-                      = text_url_to_link(h(simple_format(comment.text, class: "mb-0 comment-text"))).html_safe
-                      - if comment.user.id == current_user.id
-                        span#commentDropdownMenu.comment-dropdown-menu.dropdown-toggle.dropdown-arrow-hide.ml-auto.pointer.none data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                          i.fa.fa-ellipsis-h
-                        ul.dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="commentDropdownMenu"
-                          li.dropdown-item
-                            = link_to 'Edit', "/posts/#{@post.id}/comments/#{comment.id}/edit", class: "dropdown-item pl-2 text-thin"
-                          li.dropdown-item
-                            = link_to 'Delete', "/posts/#{@post.id}/comments/#{comment.id}", method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "dropdown-item pl-2 text-thin text-danger"
+                    .comment-one
+                      .d-inline-flex
+                        .comment-user
+                          = link_to "/#{comment.user.user_name}", class: "d-flex my-auto"
+                            - if comment.user.avatar?
+                              = image_tag comment.user.avatar, size: "20x20", class: "rounded-circle mr-2 my-auto"
+                            - else
+                              = image_tag "account_default.jpg", size: "20x20", class: "unknown-icon mr-2 my-auto"
+                            = simple_format(comment.user.user_name, class: "text-sm text-muted text-bold mr-3 my-auto")
+                        .comment-text
+                          = text_url_to_link(h(simple_format(comment.text, class: "comment-text my-auto"))).html_safe
+                        - if comment.user.id == current_user.id
+                          .comment-action
+                            span#commentDropdownMenu.comment-dropdown-menu.dropdown-toggle.dropdown-arrow-hide.ml-2.pointer.none data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                              svg.more-icon height="18" viewbox=("0 0 24 24") width="18" xmlns="http://www.w3.org/2000/svg" class="text-light"
+                                path d=("M0 0h24v24H0z") fill="none"
+                                path d=("M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z")
+                            ul.dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="commentDropdownMenu"
+                              li.dropdown-item
+                                = link_to 'Edit', "/posts/#{@post.id}/comments/#{comment.id}/edit", class: "dropdown-item pl-2 text-thin"
+                              li.dropdown-item
+                                = link_to 'Delete', "/posts/#{@post.id}/comments/#{comment.id}", method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "dropdown-item pl-2 text-thin text-danger"
 
           .card-footer.bg-white
             = form_tag("/posts/#{@post.id}/comments", method: :post) do
