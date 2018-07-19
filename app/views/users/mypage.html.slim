@@ -1,4 +1,4 @@
-= render 'header'
+= render 'posts/header'
 main.bg-light.pb-1
   .container
     .col-10.pt-5.pb-4.d-flex.mx-auto
@@ -23,8 +23,16 @@ main.bg-light.pb-1
             = @post_count
         .p-3
           | フォロワー：
+          span
+            a href="#{followers_user_path(@user)}" class="d-inline-flex"
+              #followers.stat
+                = @user.followers.count
         .p-3
           | フォロー：
+          span
+            a href="#{following_user_path(@user)}" class="d-inline-flex"
+              #following.stat
+                = @user.followings.count
         .p-3
           | いいね：
           span
@@ -131,4 +139,4 @@ main.bg-light.pb-1
             = form_tag("/posts/#{post.id}/comments", method: :post) do
               input.add-comment-input.col-12.pl-0 type="text" name="text" placeholder="Add Comment..."
 
-= render 'footer'
+= render 'posts/footer'
