@@ -153,6 +153,14 @@ footer {
   font-size: small;
 }
 
+.text-lg {
+  font-size: large;
+}
+
+.text-xl {
+  font-size: x-large;
+}
+
 .line-height-middle {
   line-height: 1em;
 }
@@ -511,4 +519,15 @@ input.sign-up-input::placeholder {
 
 .carousel-control-next:hover {
   background: linear-gradient(to left,rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0));
+}
+
+/**************************************
+*               My Page
+***************************************/
+.user-activity {
+  font-size: 28px;
+}
+
+.btn-follow {
+  width: 180px;
 }

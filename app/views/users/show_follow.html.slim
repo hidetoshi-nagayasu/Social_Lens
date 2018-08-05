@@ -1,12 +1,32 @@
-.row
-  aside.span4
-    section
-      = render 'users/stats'
-      h2= @title
+= render 'posts/header'
+main.bg-light.pb-1
+  .container
+    .col-7.mx-auto.pt-3
+      .d-flex.my-2
+        h3.text-secondary = @title
+        - if @is_follower == 0
+          a.ml-auto.mt-auto href="#{followers_user_path(@user)}"
+            | Follower List
+            = fa_icon("angle-right", class: "ml-2")
+        - else
+          a.ml-auto.mt-auto href="#{following_user_path(@user)}"
+            | Follow List
+            = fa_icon("angle-right", class: "ml-2")
       - if @users.any?
-        - @users.each do |user|
-          .user_avatars
-            span
-              img src="#{user.avatar.url(:thumb)}" /
-            br/
-            = link_to user.username ,user_path(user)
+        ul.list-group.box-shadow-sm
+          - @users.each do |user|
+            li.list-group-item.d-flex
+              .d-inline
+                - if user.avatar?
+                  = image_tag user.avatar, size: "80x80"
+                - else
+                  = image_tag "account_default.jpg", size: "80x80"
+              .ml-3
+                = link_to "/#{user.user_name}", class: "text-secondary"
+                  = user.user_name
+                p.text-sm
+                  = user.followers.count
+                  |  followers
+              .follow-wrapper.my-auto.ml-auto id="user_#{user.id}"
+                = render partial: 'follow_form', :locals => { :user => user } if signed_in?
+= render 'posts/footer'

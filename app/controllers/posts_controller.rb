@@ -5,7 +5,15 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.includes(:user).where(is_deleted: 0).order('id DESC')
+    @relationship = Relationship.where(follower_id: current_user.id)
+
+    # ログインユーザーのIDとフォローしているユーザーのIDを配列化
+    ids = [];
+    @relationship.each do |relationship|
+      ids.push(relationship.following_id)
+    end
+    ids.push(current_user.id)
+    @posts = Post.includes(:user).where(user_id: ids, is_deleted: 0).order('id DESC')
     @post = Post.new
     @comments = Comment.where(is_deleted: 0).includes(:post).all
   end

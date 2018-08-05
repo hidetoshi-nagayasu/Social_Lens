@@ -1,47 +1,7 @@
 = render 'posts/header'
 main.bg-light.pb-1
   .container
-    .col-10.pt-5.pb-4.d-flex.mx-auto
-      .profile-image.col-sm-4.text-center.py-4
-        - if @user.avatar?
-          = image_tag @user.avatar, size: "180x180", class: "box-shadow-sm"
-        - else
-          = image_tag "account_default.jpg", size: "180x180", class: "box-shadow-sm"
-      .user-info.col-sm-8.py-3
-        .d-flex
-          h1
-            = @user.user_name
-          - if @user.id == current_user.id
-            = link_to "プロフィールを編集", edit_user_registration_path, class: "btn btn-link text-sm ml-auto text-muted"
-        p
-          = text_url_to_link(h(simple_format(@user.introduction))).html_safe
-    .col-10.mb-3.mx-auto
-      .d-flex.justify-content-center
-        .p-3
-          | 投稿数：
-          span
-            = @post_count
-        .p-3
-          | フォロワー：
-          span
-            a href="#{followers_user_path(@user)}" class="d-inline-flex"
-              #followers.stat
-                = @user.followers.count
-        .p-3
-          | フォロー：
-          span
-            a href="#{following_user_path(@user)}" class="d-inline-flex"
-              #following.stat
-                = @user.followings.count
-        .p-3
-          | いいね：
-          span
-            = @like_count
-        .p-3
-          | 被いいね：
-          span
-            = @inbound_like_count
-
+    = render 'user_info', { user: @user }
     .col-md-6.mx-auto
       -# Post Card
       - @posts.each do |post|

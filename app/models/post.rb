@@ -18,4 +18,7 @@ class Post < ApplicationRecord
   def like?(user)
       like_users.include?(user)
   end
+
+  scope :subscribed, ->(followers) { where user_id: followers, is_deleted: 0 }
+
 end
