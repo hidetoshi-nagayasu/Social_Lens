@@ -22,7 +22,7 @@ main.bg-light.pb-1
                 - else
                   = image_tag "account_default.jpg", size: "80x80"
               .ml-3
-                = link_to "/#{user.user_name}", class: "text-secondary"
+                = link_to "/#{user.user_name}", class: "text-secondary text-bold"
                   = user.user_name
                 p.text-sm
                   = user.followers.count

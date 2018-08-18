@@ -9,15 +9,25 @@
         .text-white
           = devise_error_messages!
         .field.mb-3
-          = f.text_field :full_name, autofocus: true, autocomplete: "full_name", class: "text-white container-fluid orig-input-text sign-up-input", placeholder: "フルネーム"
+          = f.label :full_name, class: "text-white text-sm"
+            | Full Name
+          = f.text_field :full_name, autofocus: true, autocomplete: "full_name", class: "text-white container-fluid orig-input-text sign-up-input"
         .field.mb-3
-          = f.text_field :user_name, autocomplete: "user_name", class: "text-white container-fluid orig-input-text sign-up-input", placeholder: "ユーザー名"
+          = f.label :user_name, class: "text-white text-sm"
+            | User Name
+          = f.text_field :user_name, autocomplete: "user_name", class: "text-white container-fluid orig-input-text sign-up-input"
         .field.mb-3
-          = f.email_field :email, autocomplete: "email", class: "text-white container-fluid orig-input-text sign-up-input", placeholder: "メールアドレス"
+          = f.label :email, class: "text-white text-sm"
+            | Email
+          = f.email_field :email, autocomplete: "email", class: "text-white container-fluid orig-input-text sign-up-input"
         .field.mb-3.text-white
-          = f.password_field :password, autocomplete: "off", class: "text-white container-fluid orig-input-text sign-up-input", placeholder: "パスワード　※6文字以上"
+          = f.label :password, class: "text-white text-sm"
+            | Password
+          = f.password_field :password, autocomplete: "off", class: "text-white container-fluid orig-input-text sign-up-input"
         .field.mb-4
-          = f.password_field :password_confirmation, autocomplete: "off", class: "text-white container-fluid orig-input-text sign-up-input", placeholder: "パスワード（確認）"
+          = f.label :password_confirmation, class: "text-white text-sm"
+            | Password Confirm
+          = f.password_field :password_confirmation, autocomplete: "off", class: "text-white container-fluid orig-input-text sign-up-input"
         .actions.mb-4
           = f.submit "SIGN UP", class: "btn-block text-white py-3 orig-btn-outline text-light space-1 sign-up-submit"
         .text-center
