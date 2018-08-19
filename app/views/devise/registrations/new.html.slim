@@ -9,23 +9,23 @@
         .text-white
           = devise_error_messages!
         .field.mb-3
-          = f.label :full_name, class: "text-white text-sm"
+          = f.label :full_name, class: "text-white text-sm mb-0"
             | Full Name
           = f.text_field :full_name, autofocus: true, autocomplete: "full_name", class: "text-white container-fluid orig-input-text sign-up-input"
         .field.mb-3
-          = f.label :user_name, class: "text-white text-sm"
+          = f.label :user_name, class: "text-white text-sm mb-0"
             | User Name
           = f.text_field :user_name, autocomplete: "user_name", class: "text-white container-fluid orig-input-text sign-up-input"
         .field.mb-3
-          = f.label :email, class: "text-white text-sm"
+          = f.label :email, class: "text-white text-sm mb-0"
             | Email
           = f.email_field :email, autocomplete: "email", class: "text-white container-fluid orig-input-text sign-up-input"
         .field.mb-3.text-white
-          = f.label :password, class: "text-white text-sm"
+          = f.label :password, class: "text-white text-sm mb-0"
             | Password
           = f.password_field :password, autocomplete: "off", class: "text-white container-fluid orig-input-text sign-up-input"
         .field.mb-4
-          = f.label :password_confirmation, class: "text-white text-sm"
+          = f.label :password_confirmation, class: "text-white text-sm mb-0"
             | Password Confirm
           = f.password_field :password_confirmation, autocomplete: "off", class: "text-white container-fluid orig-input-text sign-up-input"
         .actions.mb-4

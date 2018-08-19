@@ -81,8 +81,8 @@ main.bg-light
                 .comment-area.mt-3
                   - @comments.each do |comment|
                     - if comment.post.id == post.id
-                      .comment-one
-                        .d-inline-flex
+                      .comment-one.py-1
+                        .d-flex
                           .comment-user
                             = link_to "#{comment.user.user_name}", class: "d-flex my-auto"
                               - if comment.user.avatar?
@@ -92,15 +92,16 @@ main.bg-light
                               = simple_format(comment.user.user_name, class: "text-sm text-muted text-bold mr-3 my-auto")
                           .comment-text id="comment-#{comment.id}"
                             = text_url_to_link(h(simple_format(comment.text, class: "comment-text my-auto"))).html_safe
-                          - if comment.user.id == current_user.id && comment.post.id == post.id
-                            .comment-action id="comment-action-#{comment.id}"
-                              span#commentDropdownMenu.comment-dropdown-menu.dropdown-toggle.dropdown-arrow-hide.ml-2.pointer.none data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                svg.more-icon height="18" viewbox=("0 0 24 24") width="18" xmlns="http://www.w3.org/2000/svg" class="text-light"
-                                  path d=("M0 0h24v24H0z") fill="none"
-                                  path d=("M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z")
-                              .dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="commentDropdownMenu"
-                                = link_to "Edit", edit_post_comment_path(post_id: post.id, id: comment.id), remote: true, class: "dropdown-item pl-4 py-2 text-thin"
-                                = link_to "Delete", "/posts/#{post.id}/comments/#{comment.id}", method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "dropdown-item pl-4 py-2 text-thin text-danger"
+                          .comment-action.col-1
+                            - if comment.user.id == current_user.id && comment.post.id == post.id
+                              .comment-action-inner id="comment-action-#{comment.id}"
+                                span#commentDropdownMenu.comment-dropdown-menu.dropdown-toggle.dropdown-arrow-hide.pointer.none data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                  svg.more-icon height="18" viewbox=("0 0 24 24") width="18" xmlns="http://www.w3.org/2000/svg" class="text-light"
+                                    path d=("M0 0h24v24H0z") fill="none"
+                                    path d=("M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z")
+                                .dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="commentDropdownMenu"
+                                  = link_to "Edit", edit_post_comment_path(post_id: post.id, id: comment.id), remote: true, class: "dropdown-item pl-4 py-2 text-thin"
+                                  = link_to "Delete", "/posts/#{post.id}/comments/#{comment.id}", method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "dropdown-item pl-4 py-2 text-thin text-danger"
 
             .card-footer.bg-white
               = form_tag("/posts/#{post.id}/comments", method: :post) do

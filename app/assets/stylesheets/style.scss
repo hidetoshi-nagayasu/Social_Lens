@@ -149,6 +149,10 @@ footer {
   display: none;
 }
 
+.text-xs {
+  font-size: x-small;
+}
+
 .text-sm {
   font-size: small;
 }
@@ -165,6 +169,10 @@ footer {
   line-height: 1em;
 }
 
+.text-underline {
+  text-decoration: underline solid;
+}
+
 /**************************************
 *              Component
 ***************************************/
@@ -174,7 +182,7 @@ footer {
   border: none;
   background-color: rgba(221, 219, 219, 0.493) !important;
   border-radius: 5px;
-  font-size: 20px;
+  font-size: 16px;
   padding: 0.4em 0.5em;
 }
 
@@ -333,10 +341,10 @@ input.sign-up-input::placeholder {
   }
 
   .sign-up-input {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
     margin-bottom: -0.4em;
-    font-size: 14px;
+    font-size: 12px;
   }
 }
 
