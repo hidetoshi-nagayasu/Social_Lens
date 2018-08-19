@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'posts'      => 'posts#index'
   get ':user_name' => 'users#mypage'
   resources :posts do
-    resources :comments, only: [:create, :edit, :destroy]
+    resources :comments
   end
   resources :likes, only: [:create, :destroy]
   resources :users do

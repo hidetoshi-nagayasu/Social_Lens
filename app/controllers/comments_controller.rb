@@ -6,6 +6,15 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    @comment = Comment.find(params[:id])
+    @post_id = params[:post_id]
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def update
   end
 
   def destroy

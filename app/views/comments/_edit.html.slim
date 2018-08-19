@@ -1,0 +1,2 @@
+= form_for "/posts/#{@post_id}/comments/#{@comment.id}", html: {method: "patch"} do |f|
+  = f.text_field :text, value: "#{@comment.text}", class: "text-sm form-control"

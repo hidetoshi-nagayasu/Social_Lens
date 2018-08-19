@@ -90,19 +90,17 @@ main.bg-light
                               - else
                                 = image_tag "account_default.jpg", size: "20x20", class: "unknown-icon mr-2 my-auto"
                               = simple_format(comment.user.user_name, class: "text-sm text-muted text-bold mr-3 my-auto")
-                          .comment-text
+                          .comment-text id="comment-#{comment.id}"
                             = text_url_to_link(h(simple_format(comment.text, class: "comment-text my-auto"))).html_safe
                           - if comment.user.id == current_user.id && comment.post.id == post.id
-                            .comment-action
+                            .comment-action id="comment-action-#{comment.id}"
                               span#commentDropdownMenu.comment-dropdown-menu.dropdown-toggle.dropdown-arrow-hide.ml-2.pointer.none data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                 svg.more-icon height="18" viewbox=("0 0 24 24") width="18" xmlns="http://www.w3.org/2000/svg" class="text-light"
                                   path d=("M0 0h24v24H0z") fill="none"
                                   path d=("M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z")
-                              ul.dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="commentDropdownMenu"
-                                li.dropdown-item
-                                  = link_to 'Edit', "/posts/#{post.id}/comments/#{comment.id}/edit", class: "dropdown-item pl-2 text-thin"
-                                li.dropdown-item
-                                  = link_to 'Delete', "/posts/#{post.id}/comments/#{comment.id}", method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "dropdown-item pl-2 text-thin text-danger"
+                              .dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="commentDropdownMenu"
+                                = link_to "Edit", edit_post_comment_path(post_id: post.id, id: comment.id), remote: true, class: "dropdown-item pl-4 py-2 text-thin"
+                                = link_to "Delete", "/posts/#{post.id}/comments/#{comment.id}", method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "dropdown-item pl-4 py-2 text-thin text-danger"
 
             .card-footer.bg-white
               = form_tag("/posts/#{post.id}/comments", method: :post) do
