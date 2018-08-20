@@ -1,4 +1,4 @@
-= render 'header'
+= render partial: 'header', :locals => {:user => current_user}
 main.bg-light
   .container
     - if notice
@@ -8,7 +8,10 @@ main.bg-light
           span aria-hidden="true"
             svg#i-close fill="none" height="18" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="18"
               path d=("M2 30 L30 2 M30 30 L2 2")
+    h3.pt-4.text-center.text-muted
+      | KEYWORD:
+      = @keyword
     .d-md-flex.pt-4
       .col-md-6.mx-auto
-        = render 'post', posts: @posts
+        = render @posts 
 = render 'footer'

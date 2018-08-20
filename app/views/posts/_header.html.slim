@@ -2,12 +2,9 @@ header
   nav.navbar.navbar-light.justify-content-between.container
     a.navbar-brand.text-white.space-1 href="/"
       | Social Lens
-    form.col-5
-      input.search-input.pl-3.py-2 type="text" placeholder="Search..."
+    = form_tag(search_posts_path, method: "get", class: "col-6 mx-auto") do
+      input.search-input.pl-3.py-2 type="text" name="keyword" placeholder="Search..."
     .navbar-text.d-flex
-      .dropdown.mx-4
-        svg#i-bell.dropdown-toggle.text-white.dropdown-arrow-hide.align-middle.pointer fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
-          path d=("M8 17 C8 12 9 6 16 6 23 6 24 12 24 17 24 22 27 25 27 25 L5 25 C5 25 8 22 8 17 Z M20 25 C20 25 20 29 16 29 12 29 12 25 12 25 M16 3 L16 6")
       .dropdown.mx-4
         a.dropdown-toggle.dropdown-arrow-hide.align-middle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
           - if current_user.avatar?

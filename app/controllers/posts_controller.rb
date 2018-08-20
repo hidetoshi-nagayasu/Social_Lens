@@ -21,8 +21,9 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post = Post.find(params[:id])
-    @comments = @post.comments.where(is_deleted: 0).includes(:user)
+    # @post = Post.find(params[:id])
+    @posts = Post.includes(:user).where(id: params[:id])
+    @comments = Comment.where(post_id: params[:id], is_deleted: 0).includes(:user)
   end
 
   # GET /posts/new
@@ -82,6 +83,13 @@ class PostsController < ApplicationController
     @post_count = Post.where(user_id: @user.id).count
     @like_count = Like.where(user_id: @user.id).count
     @inbound_like_count = @posts.sum(:likes_count)
+  end
+
+  def search
+    @posts = Post.includes(:user).where('text LIKE ?', "%#{params[:keyword]}%").where(is_deleted: 0).order('created_at DESC')
+    @post = Post.new
+    @comments = Comment.where(is_deleted: 0).includes(:post).all
+    @keyword = params[:keyword]
   end
 
   private
