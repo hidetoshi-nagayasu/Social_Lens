@@ -13,5 +13,5 @@ main.bg-light
       = @keyword
     .d-md-flex.pt-4
       .col-md-6.mx-auto
-        = render @posts 
+        = render partial: 'post', :locals => { :posts => @posts }
 = render 'footer'

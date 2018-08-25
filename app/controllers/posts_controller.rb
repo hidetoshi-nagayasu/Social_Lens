@@ -88,7 +88,7 @@ class PostsController < ApplicationController
   def search
     @posts = Post.includes(:user).where('text LIKE ?', "%#{params[:keyword]}%").where(is_deleted: 0).order('created_at DESC')
     @post = Post.new
-    @comments = Comment.where(is_deleted: 0).includes(:post).all
+    @comments = Comment.where(is_deleted: 0).includes([:user]).all
     @keyword = params[:keyword]
   end
 

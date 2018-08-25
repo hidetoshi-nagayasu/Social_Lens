@@ -10,7 +10,7 @@ main.bg-light
               path d=("M2 30 L30 2 M30 30 L2 2")
     .d-md-flex.pt-4
       .col-md-6.ml-auto
-        = render @posts 
+        = render partial: 'post', :locals => { :posts => @posts }
       .col-md-4
         button.btn.col-6.text-white.text-center.py-2.new-post.orig-btn data-toggle="modal" data-target="#newPostModal"
           | New Post

@@ -2,7 +2,7 @@
   - @posts.each_with_index do |post, post_index|
     .card.mb-5.box-shadow-sm
       .card-header.bg-white
-        = link_to "#{post.user.user_name}"
+        = link_to "/#{post.user.user_name}"
           - if post.user.avatar?
             = image_tag post.user.avatar, size: "30x30", class: "rounded-circle mr-2"
           - else
@@ -70,7 +70,7 @@
                 .comment-one.py-1
                   .d-flex
                     .comment-user
-                      = link_to "#{comment.user.user_name}", class: "d-flex my-auto"
+                      = link_to "/#{comment.user.user_name}", class: "d-flex my-auto"
                         - if comment.user.avatar?
                           = image_tag comment.user.avatar, size: "20x20", class: "rounded-circle mr-2 my-auto"
                         - else
