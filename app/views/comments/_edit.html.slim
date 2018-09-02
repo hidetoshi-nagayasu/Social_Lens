@@ -1,0 +1,2 @@
+= form_for @comment, :url => {:action => "update"} do |f|
+  = f.text_field :text, id: :comment_text, value: "#{@comment.text}", class: "text-xs form-control col-11", autofocus: true

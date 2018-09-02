@@ -1,0 +1,7 @@
+= render 'posts/header'
+main.bg-light.pb-1
+  .container
+    = render 'user_info', { user: @user }
+    .col-md-6.mx-auto
+      = render 'posts/post', posts: @posts
+= render 'posts/footer'

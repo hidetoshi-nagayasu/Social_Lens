@@ -1,70 +1,19 @@
-header
-  nav.navbar.navbar-light.justify-content-between.container
-    a.navbar-brand.text-white.space-1 href="/"
-      | Social Lens
-    form.col-5
-      input.search-input.pl-3.py-2 type="text" placeholder="Search..."
-    .navbar-text.d-flex
-      .dropdown.mx-4
-        svg#i-bell.dropdown-toggle.text-white.dropdown-arrow-hide.align-middle.pointer fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
-          path d=("M8 17 C8 12 9 6 16 6 23 6 24 12 24 17 24 22 27 25 27 25 L5 25 C5 25 8 22 8 17 Z M20 25 C20 25 20 29 16 29 12 29 12 25 12 25 M16 3 L16 6")
-      .dropdown.mx-4
-        svg#i-user.dropdown-toggle.text-white.dropdown-arrow-hide.align-middle.pointer data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
-          path d=("M22 11 C22 16 19 20 16 20 13 20 10 16 10 11 10 6 12 3 16 3 20 3 22 6 22 11 Z M4 30 L28 30 C28 21 22 20 16 20 10 20 4 21 4 30 Z")
-        ul.dropdown-menu.card-shadow-deep aria-labelledby="i-user"
-          / = link_to "Account", "/users/{#current_user.id}" class: "dropdown-item text-thin"
-          / .dropdown-divider
-          li.dropdown-item.d-flex
-            svg#i-signout.pl-0.pt-2 fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
-              path d=("M28 16 L8 16 M20 8 L28 16 20 24 M11 28 L3 28 3 4 11 4")
-            = link_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item pl-2 text-thin"
+= render partial: 'header', :locals => {:user => current_user}
 main.bg-light
   .container
-    = notice
-      p#notice.alert.alert-success role="alert"
+    - if notice
+      .alert.alert-success.mt-2.col-8.mx-auto.alert-dismissible.fade.show
+        = notice
+        button.close type="button" data-dismiss="alert" aria-label="Close"
+          span aria-hidden="true"
+            svg#i-close fill="none" height="18" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="18"
+              path d=("M2 30 L30 2 M30 30 L2 2")
     .d-md-flex.pt-4
       .col-md-6.ml-auto
-        - @posts.each do |post|
-          .card.mb-5.card-shadow
-            .card-header.bg-white
-              = post.user.last_name
-              .float-right.pointer.pr-2.dropdown
-                span#dropdownMenu.dropdown-toggle.dropdown-arrow-hide data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                  i.fa.fa-ellipsis-h.fa-lg
-                ul.dropdown-menu.dropdown-menu-right.card-shadow-deep aria-labelledby="dropdownMenu"
-                  li.dropdown-item.d-flex
-                    svg#i-eye.pl-0.pt-2 fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
-                      circle cx="17" cy="15" r="1"
-                      circle cx="16" cy="16" r="6"
-                      path d=("M2 16 C2 16 7 6 16 6 25 6 30 16 30 16 30 16 25 26 16 26 7 26 2 16 2 16 Z") 
-                    = link_to 'Show', post, class: "dropdown-item pl-2 text-thin"
-                  li.dropdown-item.d-flex
-                    svg#i-edit.pl-0.pt-2 fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
-                      path d=("M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z")
-                    = link_to 'Edit', edit_post_path(post), class: "dropdown-item pl-2 text-thin"
-                  li.dropdown-item.d-flex
-                    svg#i-trash.pl-0.pt-2 fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
-                      path d=("M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6")
-                    = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item pl-2 text-thin"
-
-            -# Post Card
-            .card-body
-              = simple_format(post.text)
-              .likebox.mt-4
-                a.pointer
-                  svg#i-heart.mx-2 fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
-                    path d=("M4 16 C1 12 2 6 7 4 12 2 15 6 16 8 17 6 21 2 26 4 31 6 31 12 28 16 25 20 16 28 16 28 16 28 7 20 4 16 Z")
-                a.pointer
-                  svg#i-msg.mx-2 fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
-                    path d=("M2 4 L30 4 30 22 16 22 8 29 8 22 2 22 Z")
-            .card-footer.bg-white
-              form action="" method="post"
-                input.add-comment-input.col-12.pl-0 type="text" placeholder="Add Comment..."
+        = render partial: 'post', :locals => { :posts => @posts }
       .col-md-4
-        button.btn.col-6.text-white.text-center.py-2.new-post data-toggle="modal" data-target="#newPostModal"
+        button.btn.col-6.text-white.text-center.py-2.new-post.orig-btn data-toggle="modal" data-target="#newPostModal"
           | New Post
-
-        -# New Post Modal
         #newPostModal.modal.fade tabindex="-1" role="dialog" aria-labelledby="newPostModalTitle" aria-hidden="true"
           .modal-dialog.modal-dialog-centered role="document"
             .modal-content
@@ -75,15 +24,19 @@ main.bg-light
                   span aria-hidden="true"
                     svg#i-close fill="none" height="18" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="18"
                       path d=("M2 30 L30 2 M30 30 L2 2")
-
               .modal-body
                 = form_for @post, html: {method: "post"} do |f|
                   .field.new-post-wrapper
-                    = f.text_area :text, id: :post_text, class: "new-post-textarea", placeholder: "Post text...", rows: 8
+                    = f.text_area :text, id: :post_text, class: "post-textarea", placeholder: "Post text...", rows: 8
+                  .post-image-thumb.text-center
+                    span
                   .field
-                      svg#i-photo fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
-                        path d=("M20 24 L12 16 2 26 2 2 30 2 30 24 M16 20 L22 14 30 22 30 30 2 30 2 24")
-                        circle cx="10" cy="9" r="3"
-
+                    #post-image-upload
+                      = f.file_field :images, multiple: true, id: "input-image-file", class: "none"
+                      span.pointer.image-icon
+                        svg#i-photo fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
+                          path d=("M20 24 L12 16 2 26 2 2 30 2 30 24 M16 20 L22 14 30 22 30 30 2 30 2 24")
+                          circle cx="10" cy="9" r="3"
                   .action
-                    = f.submit "Create", class: "btn btn-block py-2 new-post"
+                    = f.submit "Create", class: "btn btn-block py-3 post-submit"
+= render 'footer'
