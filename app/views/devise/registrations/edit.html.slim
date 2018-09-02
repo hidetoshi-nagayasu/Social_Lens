@@ -1,42 +1,66 @@
-h2
-  | Edit 
-  = resource_name.to_s.humanize
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    div
-      | Currently waiting confirmation for: 
-      = resource.unconfirmed_email
-  .field
-    = f.label :password
-    i
-      | (leave blank if you don't want to change it)
-    br
-    = f.password_field :password, autocomplete: "off"
-    - if @minimum_password_length
-      br
-      em
-        = @minimum_password_length
-        |  characters minimum
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .field
-    = f.label :current_password
-    i
-      | (we need your current password to confirm your changes)
-    br
-    = f.password_field :current_password, autocomplete: "off"
-  .actions
-    = f.submit "Update"
-h3
-  | Cancel my account
-p
-  | Unhappy? 
-  = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
-= link_to "Back", :back
+= render 'posts/header'
+main.bg-light
+  .col-md-6.pt-4.mx-auto
+    .card
+      .card-header
+        | アカウント編集
+      .card-body
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+          = devise_error_messages!
+          .form-group.row.field
+            = f.label :avatar, class: "col-sm-3 col-form-label text-right"
+              | プロフィール写真
+            .col-sm-9
+              - if current_user.avatar?
+                = image_tag current_user.avatar, size: "180x180", class: "mb-3"
+              - else
+                = image_tag "account_default.jpg", size: "180x180", class: "mb-3"
+              #js-selectFile
+                = f.file_field :avatar, class: "js-upload none"
+                button.original_btn
+                  | ファイルを選択
+                span.icon
+                  | 未選択
+          .form-group.row.field
+            = f.label :full_name, class: "col-sm-3 col-form-label text-right"
+              | フルネーム
+            .col-sm-9
+              = f.text_field :full_name, class: "form-control"
+          .form-group.row.field
+            = f.label :user_name, class: "col-sm-3 col-form-label text-right"
+              | ユーザー名
+            .col-sm-9
+              = f.text_field :user_name, class: "form-control"
+          .form-group.row.field
+            = f.label :email, class: "col-sm-3 col-form-label text-right"
+            .col-sm-9
+              = f.email_field :email, autocomplete: "email", class: "form-control"
+            - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+              div
+                | Currently waiting confirmation for: 
+                = resource.unconfirmed_email
+          .form-group.row
+            = f.label :introduction, class: "col-sm-3 col-form-label text-right"
+              | 自己紹介
+            .col-sm-9
+              = f.text_area :introduction, rows: "5", class: "form-control", maxlength: "300", placeholder: "300文字以内"
+          .form-group.row.field
+            = f.label :password, class: "col-sm-3 col-form-label text-right"
+              | 新しいパスワード
+            .col-sm-9
+              = f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "6文字以上（※変更したくない場合は空白のままにしてください）"
+          .form-group.row.field
+            = f.label :password_confirmation, class: "col-sm-3 col-form-label text-right"
+              | 新しいパスワード（確認）
+            .col-sm-9
+              = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
+          .form-group.row.field
+            = f.label :current_password, class: "col-sm-3 col-form-label text-right"
+              | 現在のパスワード
+            .col-sm-9
+              = f.password_field :current_password, autocomplete: "off", class: "form-control", placeholder: "変更を確認するために現在のパスワードが必要です"
+          .actions.text-right
+            = f.submit "保存する", class: "btn px-4 py-2 post-submit"
+        .cancel-account.text-right.mt-4
+          = button_to "退会される方はこちら", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-link text-muted text-sm"
+= render 'posts/footer'

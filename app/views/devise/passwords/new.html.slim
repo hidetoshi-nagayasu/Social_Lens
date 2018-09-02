@@ -6,9 +6,9 @@
       .text-white
         = devise_error_messages!
       .field.mb-4
-        = f.label :Email, class: "text-white"
+        = f.label :Email, class: "text-white text-sm mb-0"
         = f.email_field :email, autofocus: true, autocomplete: "email", class: "text-white container-fluid orig-input-text"
       .actions.mb-4
-        = f.submit "パスワードをリセットする", class: "btn-block text-white py-3 orig-btn-outline text-light space-1"
+        = f.submit "RESET PASSWORD", class: "btn-block text-white py-3 orig-btn-outline text-light space-1"
       .text-center
         = render "devise/shared/links"

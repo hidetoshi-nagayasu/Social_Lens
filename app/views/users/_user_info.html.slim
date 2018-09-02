@@ -1,0 +1,45 @@
+.col-10.pt-5.d-flex.mx-auto
+	.profile-image.col-sm-4.text-center.py-4
+		- if user.avatar?
+			= image_tag user.avatar, size: "180x180", class: "box-shadow-sm"
+		- else
+			= image_tag "account_default.jpg", size: "180x180", class: "box-shadow-sm"
+		.follow-wrapper.mt-3 id="user_#{user.id}"
+			= render partial: 'follow_form', :locals => { :user => user } if signed_in?
+	.user-info.col-sm-8.py-3
+		.d-flex
+			h1
+				= user.user_name
+			- if user.id == current_user.id
+				= link_to "プロフィールを編集", edit_user_registration_path, class: "btn btn-link text-sm ml-auto text-muted"
+		p
+			= text_url_to_link(h(simple_format(user.introduction))).html_safe
+.col-10.mb-3.mx-auto
+	.d-flex.justify-content-center
+		.p-3
+			p.user-activity.mb-0.text-center.text-secondary.font-weight-bold
+				= @post_count
+			p.text-sm.mb-0
+				| Posts
+		.p-3
+			a href="#{followers_user_path(user)}" class="user-activity mb-0 text-center text-secondary font-weight-bold"
+				#followers.stat
+					= @followers_count
+			p.text-sm.mb-0
+				| Follower
+		.p-3
+			a href="#{following_user_path(user)}" class="user-activity mb-0 text-center text-secondary font-weight-bold"
+				#following.stat
+					= @follow_count
+			p.text-sm.mb-0
+				| Follow
+		.p-3
+			p.user-activity.mb-0.text-center.text-secondary.font-weight-bold
+				= @like_count
+			p.text-sm.mb-0
+				| Like
+		.p-3
+			p.user-activity.mb-0.text-center.text-secondary.font-weight-bold
+				= @inbound_like_count
+			p.text-sm.mb-0
+				| Liked

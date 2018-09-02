@@ -1,6 +1,32 @@
-h1
-  | Editing Post
-= render 'form', post: @post
-= link_to 'Show', @post
-|  | 
-= link_to 'Back', posts_path
+= render 'header'
+main.bg-light
+  .container
+    .d-md-flex.pt-4
+      .col-md-6.mx-auto
+        .card.card-shadow
+          = form_for @post, html: {method: "patch"} do |f|
+            .card-header.bg-white
+              - if @post.user.avatar?
+                = image_tag @post.user.avatar, size: "30x30", class: "rounded-circle mr-2"
+              - else
+                = image_tag "account_default.jpg", size: "30x30", class: "unknown-icon mr-2"
+              span.user-name.align-middle.text-secondary.text-bold
+                = @post.user.user_name
+            .card-body.card-body-nopadding
+              .post-body.p-3
+                .field.edit-post-wrapper
+                  = f.text_area :text, id: :post_text, class: "post-textarea-edit", autofocus: true
+                .post-image-thumb.text-center
+                  span
+                    - @post.images.each do |image|
+                      = image_tag image, class: "mx-1", width: "auto", height: "100px"
+                .field
+                  #post-image-upload
+                    = f.file_field :images, multiple: true, id: "input-image-file", class: "none"
+                    span.pointer.image-icon
+                      svg#i-photo fill="none" height="24" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="24"
+                        path d=("M20 24 L12 16 2 26 2 2 30 2 30 24 M16 20 L22 14 30 22 30 30 2 30 2 24")
+                        circle cx="10" cy="9" r="3"
+                .action
+                  = f.submit "Done", class: "btn btn-block py-3 post-submit"
+= render 'footer'

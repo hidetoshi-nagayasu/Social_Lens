@@ -1,9 +1,14 @@
-p#notice
-  = notice
-p
-  strong
-    | Text:
-  = @post.text
-= link_to 'Edit', edit_post_path(@post)
-|  | 
-= link_to 'Back', posts_path
+= render 'header'
+main.bg-light
+  .container
+    - if notice
+      .alert.alert-success.mt-2.col-8.mx-auto.alert-dismissible.fade.show
+        = notice
+        button.close type="button" data-dismiss="alert" aria-label="Close"
+          span aria-hidden="true"
+            svg#i-close fill="none" height="18" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox=("0 0 32 32") width="18"
+              path d=("M2 30 L30 2 M30 30 L2 2")
+    .d-md-flex.pt-4
+      .col-md-6.mx-auto
+        = render 'post', posts: @posts
+= render 'footer'

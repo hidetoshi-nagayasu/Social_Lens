@@ -6,6 +6,31 @@
 *              Color
 ***************************************/
 
+$color-like: #eb6ea5;
+
+/**************************************
+*        Bootstrap Override
+***************************************/
+
+.card {
+  border-radius: 0 !important;
+}
+
+.modal-content {
+  border-radius: 0 !important;
+  box-shadow: 
+    0 16px 24px 2px rgba(0,0,0,0.14), 
+    0 6px 30px 5px rgba(0,0,0,0.12), 
+    0 8px 10px -7px rgba(0,0,0,0.2);
+}
+
+.dropdown-menu {
+  border-radius: 0;
+}
+
+.card-header {
+  padding: 0.8em 1.0em;
+}
 
 /**************************************
 *              Common
@@ -24,7 +49,7 @@ header {
 
   .search-input {
     width: 90%;
-    border-radius: 5px;
+    border-radius: 0.2;
     opacity: 0.3;
     border: none;
     color: #444;
@@ -38,9 +63,42 @@ header {
   }
 }
 
+main {
+  min-height: calc(100% - 58px - 50px);
+}
+
+footer {
+  width: 100%;
+  height: 50px;
+
+  div {
+    line-height: 50px;
+    color: rgb(157, 91, 139);
+  }
+}
+
 /**************************************
 *              Element
 ***************************************/
+
+/* In post <a> </a> */
+.post-link {
+  color: #50b8d9;
+  transition: 0.1s;
+  position: relative;
+
+  &:hover:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    width: 104%;
+    height: 130%;
+    padding: 0.4em;
+    background-color: rgba(255,234,0,0.2);
+  }
+}
 
 /* Show horizon line both of text */
 .text-horizon-line {
@@ -79,8 +137,40 @@ header {
   font-weight: 100;
 }
 
+.text-bold {
+  font-weight: bold;
+}
+
 .space-1 {
   letter-spacing: 0.1em;
+}
+
+.none {
+  display: none;
+}
+
+.text-xs {
+  font-size: x-small;
+}
+
+.text-sm {
+  font-size: small;
+}
+
+.text-lg {
+  font-size: large;
+}
+
+.text-xl {
+  font-size: x-large;
+}
+
+.line-height-middle {
+  line-height: 1em;
+}
+
+.text-underline {
+  text-decoration: underline solid;
 }
 
 /**************************************
@@ -92,7 +182,7 @@ header {
   border: none;
   background-color: rgba(221, 219, 219, 0.493) !important;
   border-radius: 5px;
-  font-size: 20px;
+  font-size: 16px;
   padding: 0.4em 0.5em;
 }
 
@@ -102,6 +192,70 @@ header {
 }
 
 /* Button */
+.orig-btn {
+  border-radius: 0.2;
+  box-shadow: 
+    0 2px 2px 0 rgba(0,0,0,0.14),
+    0 3px 1px -2px rgba(0,0,0,0.12),
+    0 1px 5px 0 rgba(0,0,0,0.2)
+}
+
+/* オリジナルボタン */
+.original_btn {
+  border: 1px solid #ddd;
+  padding: 7px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #666;
+  background: linear-gradient(to bottom,#fff 0,#f4f4f4 100%);
+  box-shadow: inset 0px -1px 0px 0px rgba(0, 0, 0, 0.09);
+}
+
+/* 未選択時のアイコン */
+.icon {
+  font-size: 12px;
+  margin: 0 10px 0 15px;
+  padding: 3px 30px;
+  border-radius: 15px;
+  background: #666;
+  color: #fff;
+  display: inline-block;
+}
+
+/* 選択時のアイコン */
+.icon.select {
+  background: #b972ab;
+  color: #fff;
+}
+
+/* ファイル名 */
+.filename {
+  display: inline-block;
+  font-size: 12px;
+}
+
+/* Box Shadow */
+.box-shadow-sm {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.box-shadow-md {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.box-shadow-lg {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.box-shadow-xl {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.box-shadow-hover:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
 
 /**************************************
 *              Error
@@ -165,6 +319,10 @@ header {
   cursor: pointer;
 }
 
+input.sign-up-input::placeholder {
+  color: #888 !important;
+}
+
 @media (max-width: 540px) {
   .xs-none {
     display: none;
@@ -183,10 +341,10 @@ header {
   }
 
   .sign-up-input {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
     margin-bottom: -0.4em;
-    font-size: 14px;
+    font-size: 12px;
   }
 }
 
@@ -233,7 +391,31 @@ header {
 }
 
 .card-shadow-deep {
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.19);
+}
+
+.card-header-right {
+  text-align: center;
+  min-height: 30px;
+  min-width: 30px;
+}
+
+.card-header-right > span {
+  display: block;
+  min-height: 30px;
+  min-width: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  transition: 0.2s;
+  
+  &:hover {
+    background-color: #f0f0f0;
+    opacity: 0.9;
+  }
+}
+
+.more-icon {
+  fill: #999;
 }
 
 .likebox {
@@ -261,7 +443,8 @@ header {
   }
 }
 
-.new-post {
+.new-post,
+.post-submit {
   background: linear-gradient(-135deg, rgb(77, 90, 175), rgb(157, 91, 139));
   color: #fff;
   font-weight: 100;
@@ -271,7 +454,8 @@ header {
   min-height: 100px;
 }
 
-.new-post-textarea {
+.post-textarea,
+.post-textarea-edit {
   width: 100%;
   border: none;
   resize: none;
@@ -279,4 +463,79 @@ header {
   &:focus {
     outline: none;
   }
+}
+
+.comment-text {
+  font-size: 0.85em;
+}
+
+.comment-icon,
+.like-icon {
+  width: 50px;
+  height: 40px;
+  line-height: 40px;
+}
+
+.liked {
+  fill: $color-like;
+  outline: none;
+}
+
+.unknown-icon {
+  border-radius: 50%;
+}
+
+.image-icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  transition: 0.1s;
+
+  &:hover:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    border-radius: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
+}
+
+.card-body-nopadding {
+  padding: 0;
+}
+
+.carousel-control {
+  transition: all 0.2s ease;
+}
+
+.carousel-control-prev:hover {
+  background: linear-gradient(to right,rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0));
+}
+
+.carousel-control-next:hover {
+  background: linear-gradient(to left,rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0));
+}
+
+/**************************************
+*               My Page
+***************************************/
+.user-activity {
+  font-size: 28px;
+}
+
+.btn-follow {
+  width: 180px;
 }

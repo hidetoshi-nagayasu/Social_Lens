@@ -1,0 +1,7 @@
+$("#comment-<%= @comment.id %>")
+	.addClass('w-100')
+	.html("<%= escape_javascript(render "comments/edit", comment: @comment) %>");
+
+$("#comment-action-<%= @comment.id %>")
+	.addClass('float-right')
+	.html("<%= escape_javascript(render "comments/action", comment: @comment) %>");
