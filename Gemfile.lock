@@ -111,7 +111,13 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
     kgio (2.11.2)
+=======
+    jquery-turbolinks (2.1.0)
+      railties (>= 3.1.0)
+      turbolinks
+>>>>>>> 91d8fb1a23f0aba0ddbfd978421470ae43f1c136
 =======
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
@@ -244,15 +250,11 @@ GEM
       execjs (>= 0.3.0, < 3)
     warden (1.2.7)
       rack (>= 1.0)
-<<<<<<< HEAD
     web-console (3.6.0)
     unicorn (5.4.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
-    web-console (3.5.1)
-=======
     web-console (3.6.2)
->>>>>>> 91d8fb1a23f0aba0ddbfd978421470ae43f1c136
       actionview (>= 5.0)
       activemodel (>= 5.0)
       bindex (>= 0.4.0)

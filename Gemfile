@@ -66,13 +66,12 @@ gem 'sprockets-rails', '~> 3.2.1'
 gem 'jquery-rails'
 gem 'font-awesome-rails'
 gem 'carrierwave'
-<<<<<<< HEAD
 
 group :production, :staging do
   gem 'unicorn'
 end
-=======
+
 gem 'rmagick'
 gem 'jquery-turbolinks'
 gem 'paperclip'
->>>>>>> 91d8fb1a23f0aba0ddbfd978421470ae43f1c136
+
